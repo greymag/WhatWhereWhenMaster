@@ -1,0 +1,35 @@
+name: WhatWhereWhenMaster
+description: An application for master of "What? Where? When?" game.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^4.0.1
+  innim_lib:
+    git:
+      url: http://git.innim.ru:1414/flutter/plugins/
+      path: packages/innim_lib
+      ref: innim_lib/0.2
+  innim_ui:
+    git:
+      url: http://git.innim.ru:1414/flutter/plugins/
+      path: packages/ui/innim_ui
+      ref: innim_ui/0.2
+  multiple_localization: ^0.1.0+5
+
+  cupertino_icons: ^0.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  intl_translation: ^0.17.9
+
+flutter:
+  uses-material-design: true
