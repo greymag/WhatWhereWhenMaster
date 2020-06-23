@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:multiple_localization/multiple_localization.dart';
 
 import 'l10n/messages_all.dart';
@@ -41,4 +42,15 @@ class AppLocalizations {
   final String locale;
 
   AppLocalizations(this.locale) : assert(locale != null);
+
+  String get gameTitle => Intl.message('Выберите раунд', name: "gameTitle");
+
+  String get bottomNavigationTabGame =>
+      Intl.message('Игра', name: "bottomNavigationTabGame");
+
+  String get bottomNavigationTabNotes =>
+      Intl.message('Заметки', name: "bottomNavigationTabNotes");
+
+  String get bottomNavigationTabRules =>
+      Intl.message('Правила', name: "bottomNavigationTabRules");
 }
