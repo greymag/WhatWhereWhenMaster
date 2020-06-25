@@ -46,6 +46,12 @@ class Question extends Mappable {
   @override
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
 
+  bool get hasIntro => intro != null && intro.isNotEmpty;
+
+  bool get hasAlternativeAnswer => answerAlt != null && answerAlt.isNotEmpty;
+
+  bool get hasComment => comment != null && comment.isNotEmpty;
+
   @override
   String toString() {
     return 'Question(text: $text, answer: $answer, '

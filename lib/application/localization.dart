@@ -53,4 +53,18 @@ class AppLocalizations {
 
   String get bottomNavigationTabRules =>
       Intl.message('Правила', name: "bottomNavigationTabRules");
+
+  String get answerTitle => Intl.message('Ответ', name: "answerTitle");
+
+  String getAlternativeAnswer(String value) => Intl.message(
+        '($value)',
+        name: "getAlternativeAnswer",
+        args: [value],
+      );
+
+  String getCommentText(String comment) => Intl.message(
+        'Комментарий: $comment',
+        name: "getCommentText",
+        args: [comment],
+      );
 }
