@@ -15,15 +15,17 @@ class Round extends Mappable {
   final int number;
 
   /// Round name.
+  ///
+  /// Optional.
+  /// If note defined, than [number] will be used for name,
+  /// e.g. "Round 1".
   final String name;
 
   /// List of questions.
   final List<Question> questions;
 
-  const Round(
-      {@required this.number, @required this.name, @required this.questions})
+  const Round({@required this.number, this.name, @required this.questions})
       : assert(number != null && number >= 0),
-        assert(name != null && name.length > 0),
         assert(questions != null && questions.length > 0);
 
   factory Round.fromJson(Map<String, dynamic> json) => _$RoundFromJson(json);
