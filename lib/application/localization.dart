@@ -1,6 +1,8 @@
+import 'package:WhatWhereWhenMaster/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:multiple_localization/multiple_localization.dart';
+import 'package:numerus/numerus.dart';
 
 import 'l10n/messages_all.dart';
 
@@ -66,5 +68,29 @@ class AppLocalizations {
         'Комментарий: $comment',
         name: "getCommentText",
         args: [comment],
+      );
+
+  String getRoundTitle(Round round, int totalCounts) {
+    if (round.name?.isNotEmpty ?? false) return round.name;
+
+    if (round.number == 0)
+      return warmUpRoundTitle;
+    else if (round.number == totalCounts - 1)
+      // TODO: remove this, should require name or separate bool for such round
+      return reserveRoundTitle;
+    else
+      return getRoundNumberTitle(round.number.toRomanNumeralString());
+  }
+
+  String get warmUpRoundTitle =>
+      Intl.message('Разминка', name: "warmUpRoundTitle");
+
+  String get reserveRoundTitle =>
+      Intl.message('Резерв', name: "reserveRoundTitle");
+
+  String getRoundNumberTitle(String romanNumber) => Intl.message(
+        'Раунд $romanNumber',
+        name: "getRoundNumberTitle",
+        args: [romanNumber],
       );
 }
