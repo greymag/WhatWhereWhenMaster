@@ -93,4 +93,26 @@ class AppLocalizations {
         name: "getRoundNumberTitle",
         args: [romanNumber],
       );
+
+  String get prevQuestionBtn => Intl.message('Назад', name: "prevQuestionBtn");
+
+  String get nextQuestionBtn => Intl.message('Далее', name: "nextQuestionBtn");
+
+  String get showAnswerBtn =>
+      Intl.message('Показать ответ', name: "showAnserBtn");
+
+  String get timerResetBtn => Intl.message('Сбросить', name: "timerResetBtn");
+
+  String get timerStartBtn => Intl.message('Старт', name: "timerStartBtn");
+
+  String getTimerValue(Duration duration) => getTimeStr(
+      _zeroPad2(duration.inMinutes), _zeroPad2(duration.inSeconds % 60));
+
+  String getTimeStr(String mm, String ss) => Intl.message(
+        '$mm:$ss',
+        name: "getTimeStr",
+        args: [mm, ss],
+      );
+
+  String _zeroPad2(int val) => val.toString().padLeft(2, '0');
 }
