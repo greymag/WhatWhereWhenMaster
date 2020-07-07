@@ -61,6 +61,7 @@ class _GameScreenState extends State<GameScreen> {
           ),
           RoundTimerView(
             value: const Duration(minutes: 1),
+            alertRemaining: const Duration(seconds: 10),
           ),
         ],
       ),

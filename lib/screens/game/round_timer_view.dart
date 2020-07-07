@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:quiver/async.dart';
 
 import 'package:WhatWhereWhenMaster/application/localization.dart';
-import 'package:quiver/async.dart';
 
 /// Timer for round view.
 class RoundTimerView extends StatefulWidget {
+  /// Timer value.
   final Duration value;
 
-  const RoundTimerView({Key key, @required this.value})
+  /// Remaining, when timer is changing color.
+  final Duration alertRemaining;
+
+  const RoundTimerView(
+      {Key key, @required this.value, @required this.alertRemaining})
       : assert(value != null),
+        assert(alertRemaining != null),
         super(key: key);
 
   @override
@@ -30,6 +36,7 @@ class _RoundTimerViewState extends State<RoundTimerView> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final duration = _duration;
+    final alertRemaining = widget.alertRemaining;
     final isRunning = _timer != null;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,9 +48,11 @@ class _RoundTimerViewState extends State<RoundTimerView> {
         isRunning
             ? _RunningTimerValue(
                 timer: _timer,
+                alertRemaining: alertRemaining,
               )
             : _TimerValue(
                 duration: duration,
+                alertRemaining: alertRemaining,
               ),
         isRunning
             ? _TimerControlButton(
@@ -89,9 +98,12 @@ class _RoundTimerViewState extends State<RoundTimerView> {
 
 class _RunningTimerValue extends StatefulWidget {
   final CountdownTimer timer;
+  final Duration alertRemaining;
 
-  const _RunningTimerValue({Key key, this.timer})
+  const _RunningTimerValue(
+      {Key key, @required this.timer, @required this.alertRemaining})
       : assert(timer != null),
+        assert(alertRemaining != null),
         super(key: key);
 
   @override
@@ -105,23 +117,38 @@ class _RunningTimerValueState extends State<_RunningTimerValue> {
       stream: widget.timer,
       initialData: widget.timer,
       builder: (context, AsyncSnapshot<CountdownTimer> snapshot) {
-        return _TimerValue(duration: snapshot.data.remaining);
+        // TODO: alert sound
+        return _TimerValue(
+          duration: snapshot.data.remaining,
+          alertRemaining: widget.alertRemaining,
+        );
       },
     );
   }
 }
 
 class _TimerValue extends StatelessWidget {
-  final Duration duration;
+  static const _alertColor = Colors.red;
 
-  const _TimerValue({Key key, this.duration})
+  final Duration duration;
+  final Duration alertRemaining;
+
+  const _TimerValue(
+      {Key key, @required this.duration, @required this.alertRemaining})
       : assert(duration != null),
+        assert(alertRemaining != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
-    return Text(loc.getTimerValue(duration));
+    final isAlert = duration <= alertRemaining;
+    return Text(
+      loc.getTimerValue(duration),
+      style: TextStyle(
+        color: isAlert ? _alertColor : null,
+      ),
+    );
   }
 }
 
