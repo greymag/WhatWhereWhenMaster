@@ -107,8 +107,13 @@ class AppLocalizations {
 
   String get timerStopBtn => Intl.message('Стоп', name: "timerStopBtn");
 
-  String getTimerValue(Duration duration) => getTimeStr(
-      _zeroPad2(duration.inMinutes), _zeroPad2(duration.inSeconds % 60));
+  String getTimerValue(Duration duration) {
+    final seconds = (duration.inMilliseconds / 1000.0).round();
+    return getTimeStr(
+      _zeroPad2(duration.inMinutes),
+      _zeroPad2(seconds % 60),
+    );
+  }
 
   String getTimeStr(String mm, String ss) => Intl.message(
         '$mm:$ss',
