@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:quiver/async.dart';
 
@@ -11,10 +13,17 @@ class RoundTimerView extends StatefulWidget {
   /// Remaining, when timer is changing color.
   final Duration alertRemaining;
 
+  /// Callback to be called when the timer is complete.
+  final VoidCallback onTimerComplete;
+
   const RoundTimerView(
-      {Key key, @required this.value, @required this.alertRemaining})
+      {Key key,
+      @required this.value,
+      @required this.alertRemaining,
+      @required this.onTimerComplete})
       : assert(value != null),
         assert(alertRemaining != null),
+        assert(onTimerComplete != null),
         super(key: key);
 
   @override
@@ -90,6 +99,7 @@ class _RoundTimerViewState extends State<RoundTimerView> {
         _timer = CountdownTimer(_duration, const Duration(seconds: 1));
         _subscription = _timer.listen((timer) {}, onDone: () {
           _stopTimer();
+          widget.onTimerComplete();
         });
       });
     }
