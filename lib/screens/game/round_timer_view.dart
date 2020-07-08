@@ -33,6 +33,12 @@ class _RoundTimerViewState extends State<RoundTimerView> {
   }
 
   @override
+  void dispose() {
+    _clearTimer();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final duration = _duration;
@@ -70,8 +76,7 @@ class _RoundTimerViewState extends State<RoundTimerView> {
   void _resetTimer() {
     if (_timer != null || _duration != widget.value) {
       setState(() {
-        _timer?.cancel();
-        _timer = null;
+        _clearTimer();
         _duration = widget.value;
       });
     }
@@ -89,10 +94,14 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     if (_timer != null) {
       setState(() {
         _duration = _timer.remaining;
-        _timer.cancel();
-        _timer = null;
+        _clearTimer();
       });
     }
+  }
+
+  void _clearTimer() {
+    _timer?.cancel();
+    _timer = null;
   }
 }
 
