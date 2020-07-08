@@ -25,6 +25,8 @@ class _RoundTimerViewState extends State<RoundTimerView> {
   CountdownTimer _timer;
   Duration _duration;
 
+  StreamSubscription<CountdownTimer> _subscription;
+
   @override
   void initState() {
     _duration = widget.value;
@@ -86,6 +88,9 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     if (_timer == null) {
       setState(() {
         _timer = CountdownTimer(_duration, const Duration(seconds: 1));
+        _subscription = _timer.listen((timer) {}, onDone: () {
+          _stopTimer();
+        });
       });
     }
   }
@@ -100,6 +105,8 @@ class _RoundTimerViewState extends State<RoundTimerView> {
   }
 
   void _clearTimer() {
+    _subscription?.cancel();
+    _subscription = null;
     _timer?.cancel();
     _timer = null;
   }
