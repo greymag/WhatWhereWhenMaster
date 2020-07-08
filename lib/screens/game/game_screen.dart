@@ -19,7 +19,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  bool _showAnswer = false;
+  bool _isShowAnswer = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _GameScreenState extends State<GameScreen> {
         children: [
           QuestionView(
             question: widget.question,
-            showAnswer: _showAnswer,
+            showAnswer: _isShowAnswer,
           ),
           Row(
             mainAxisSize: MainAxisSize.max,
@@ -42,14 +42,10 @@ class _GameScreenState extends State<GameScreen> {
                   // TODO: prev question
                 },
               ),
-              if (!_showAnswer)
+              if (!_isShowAnswer)
                 FlatButton(
                   child: Text(loc.showAnswerBtn),
-                  onPressed: () {
-                    setState(() {
-                      _showAnswer = true;
-                    });
-                  },
+                  onPressed: _showAnswer,
                 ),
               FlatButton(
                 child: Text(loc.nextQuestionBtn),
@@ -66,5 +62,13 @@ class _GameScreenState extends State<GameScreen> {
         ],
       ),
     );
+  }
+
+  void _showAnswer() {
+    if (!_isShowAnswer) {
+      setState(() {
+        _isShowAnswer = true;
+      });
+    }
   }
 }
