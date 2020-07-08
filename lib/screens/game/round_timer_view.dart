@@ -69,7 +69,7 @@ class _RoundTimerViewState extends State<RoundTimerView> {
               )
             : _TimerControlButton(
                 child: Text(loc.timerStartBtn),
-                onPressed: _startTimer,
+                onPressed: duration.inMilliseconds < 10 ? null : _startTimer,
               ),
       ],
     );
