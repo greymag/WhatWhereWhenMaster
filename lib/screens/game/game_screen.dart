@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:WhatWhereWhenMaster/application/localization.dart';
 import 'package:WhatWhereWhenMaster/models/models.dart';
 import 'package:WhatWhereWhenMaster/screens/game/round_timer_view.dart';
 import 'package:WhatWhereWhenMaster/widgets/question/question_view.dart';
-import 'package:flutter/material.dart';
+import 'package:list_ext/list_ext.dart';
 
 /// Screen for game process.
 ///
@@ -30,15 +32,49 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final list = widget.round.questions;
     final question = _currentQuestion;
-    return _GameScreenContent(question: question);
+    final index = list.indexOf(question);
+    final isFirst = index == 0;
+    final isLast = index == list.length - 1;
+    return _GameScreenContent(
+      question: question,
+      onPrevPressed: isFirst
+          ? null
+          : () {
+              _changeQuestion(-1);
+            },
+      onNextPressed: isLast
+          ? null
+          : () {
+              _changeQuestion(1);
+            },
+    );
+  }
+
+  void _changeQuestion(int shift) {
+    final list = widget.round.questions;
+    final current = list.indexOf(_currentQuestion);
+    final question = list.tryElementAt(current + shift);
+
+    if (question != null && question != _currentQuestion) {
+      setState(() {
+        _currentQuestion = question;
+      });
+    }
   }
 }
 
 class _GameScreenContent extends StatefulWidget {
   final Question question;
+  final VoidCallback onPrevPressed;
+  final VoidCallback onNextPressed;
 
-  const _GameScreenContent({Key key, @required this.question})
+  const _GameScreenContent(
+      {Key key,
+      @required this.question,
+      @required this.onPrevPressed,
+      @required this.onNextPressed})
       : assert(question != null),
         super(key: key);
 
@@ -66,9 +102,7 @@ class _GameScreenContentState extends State<_GameScreenContent> {
             children: [
               FlatButton(
                 child: Text(loc.prevQuestionBtn),
-                onPressed: () {
-                  // TODO: prev question
-                },
+                onPressed: widget.onPrevPressed,
               ),
               if (!_isShowAnswer)
                 FlatButton(
@@ -77,9 +111,7 @@ class _GameScreenContentState extends State<_GameScreenContent> {
                 ),
               FlatButton(
                 child: Text(loc.nextQuestionBtn),
-                onPressed: () {
-                  // TODO: next question
-                },
+                onPressed: widget.onNextPressed,
               ),
             ],
           ),

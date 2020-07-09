@@ -22,6 +22,8 @@ class Round extends Mappable {
   final String name;
 
   /// List of questions.
+  ///
+  /// Sorted in an order of apearance.
   final List<Question> questions;
 
   const Round({@required this.number, this.name, @required this.questions})
