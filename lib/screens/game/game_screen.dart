@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 ///
 /// Shows question and timer.
 class GameScreen extends StatefulWidget {
-  final Question question;
+  final Round round;
 
-  const GameScreen({Key key, @required this.question})
-      : assert(question != null),
+  const GameScreen({Key key, @required this.round})
+      : assert(round != null),
         super(key: key);
 
   @override
@@ -19,6 +19,34 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  Question _currentQuestion;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _currentQuestion = widget.round.questions.first;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final question = _currentQuestion;
+    return _GameScreenContent(question: question);
+  }
+}
+
+class _GameScreenContent extends StatefulWidget {
+  final Question question;
+
+  const _GameScreenContent({Key key, @required this.question})
+      : assert(question != null),
+        super(key: key);
+
+  @override
+  _GameScreenContentState createState() => _GameScreenContentState();
+}
+
+class _GameScreenContentState extends State<_GameScreenContent> {
   bool _isShowAnswer = false;
 
   @override
