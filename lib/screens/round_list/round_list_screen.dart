@@ -16,23 +16,28 @@ class RoundListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final roundsCount = rounds.length;
-    return ListView(
-      children: <Widget>[
-        for (final round in rounds)
-          ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            title: Text(
-              loc.getRoundTitle(round, roundsCount),
-              style: TextStyle(fontSize: 20),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(loc.gameTitle),
+      ),
+      body: ListView(
+        children: <Widget>[
+          for (final round in rounds)
+            ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              title: Text(
+                loc.getRoundTitle(round, roundsCount),
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.of(context).push(AppRoutes.create(
+                  builder: (context) => RoundScreen(round: round),
+                ));
+              },
             ),
-            onTap: () {
-              Navigator.of(context).push(AppRoutes.create(
-                builder: (context) => RoundScreen(round: round),
-              ));
-            },
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
