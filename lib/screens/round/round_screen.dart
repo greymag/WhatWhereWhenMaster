@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:list_ext/list_ext.dart';
 
 import 'package:WhatWhereWhenMaster/application/localization.dart';
 import 'package:WhatWhereWhenMaster/models/models.dart';
 import 'package:WhatWhereWhenMaster/widgets/question/question_view.dart';
-import 'package:list_ext/list_ext.dart';
 
 import 'round_timer_view.dart';
 
@@ -36,10 +36,14 @@ class _RoundScreenState extends State<RoundScreen> {
     final list = widget.round.questions;
     final question = _currentQuestion;
     final index = list.indexOf(question);
+    final number = index + 1;
+    final total = list.length;
     final isFirst = index == 0;
-    final isLast = index == list.length - 1;
+    final isLast = number == total;
     return _RoundScreenContent(
       question: question,
+      questionNum: number,
+      totalQuestions: total,
       onPrevPressed: isFirst
           ? null
           : () {
@@ -67,6 +71,8 @@ class _RoundScreenState extends State<RoundScreen> {
 }
 
 class _RoundScreenContent extends StatefulWidget {
+  final int questionNum;
+  final int totalQuestions;
   final Question question;
   final VoidCallback onPrevPressed;
   final VoidCallback onNextPressed;
@@ -74,9 +80,13 @@ class _RoundScreenContent extends StatefulWidget {
   const _RoundScreenContent(
       {Key key,
       @required this.question,
+      @required this.questionNum,
+      @required this.totalQuestions,
       @required this.onPrevPressed,
       @required this.onNextPressed})
       : assert(question != null),
+        assert(questionNum != null),
+        assert(totalQuestions != null),
         super(key: key);
 
   @override
@@ -89,39 +99,48 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          QuestionView(
-            question: widget.question,
-            showAnswer: _isShowAnswer,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FlatButton(
-                child: Text(loc.prevQuestionBtn),
-                onPressed: widget.onPrevPressed,
-              ),
-              if (!_isShowAnswer)
+    final question = widget.question;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          loc.getQuestionTitle(widget.questionNum, widget.totalQuestions),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            QuestionView(
+              question: question,
+              showAnswer: _isShowAnswer,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 FlatButton(
-                  child: Text(loc.showAnswerBtn),
-                  onPressed: _showAnswer,
+                  child: Text(loc.prevQuestionBtn),
+                  onPressed: widget.onPrevPressed,
                 ),
-              FlatButton(
-                child: Text(loc.nextQuestionBtn),
-                onPressed: widget.onNextPressed,
-              ),
-            ],
-          ),
-          RoundTimerView(
-            value: const Duration(minutes: 1),
-            alertRemaining: const Duration(seconds: 10),
-            onTimerComplete: _showAnswer,
-          ),
-        ],
+                if (!_isShowAnswer)
+                  FlatButton(
+                    child: Text(loc.showAnswerBtn),
+                    onPressed: _showAnswer,
+                  ),
+                FlatButton(
+                  child: Text(loc.nextQuestionBtn),
+                  onPressed: widget.onNextPressed,
+                ),
+              ],
+            ),
+            RoundTimerView(
+              value: const Duration(minutes: 1),
+              alertRemaining: const Duration(seconds: 10),
+              onTimerComplete: _showAnswer,
+            ),
+          ],
+        ),
       ),
     );
   }

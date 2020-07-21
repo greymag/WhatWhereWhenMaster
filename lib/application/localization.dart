@@ -94,6 +94,14 @@ class AppLocalizations {
         args: [romanNumber],
       );
 
+  String getQuestionTitle(int questionNum, int totalCounts) {
+    return Intl.message(
+      'Вопрос $questionNum из $totalCounts',
+      name: "getQuestionTitle",
+      args: [questionNum, totalCounts],
+    );
+  }
+
   String get prevQuestionBtn => Intl.message('Назад', name: "prevQuestionBtn");
 
   String get nextQuestionBtn => Intl.message('Далее', name: "nextQuestionBtn");
