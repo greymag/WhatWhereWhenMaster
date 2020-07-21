@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'package:WhatWhereWhenMaster/application/localization.dart';
 import 'package:WhatWhereWhenMaster/models/models.dart';
-import 'package:WhatWhereWhenMaster/screens/game/round_timer_view.dart';
 import 'package:WhatWhereWhenMaster/widgets/question/question_view.dart';
 import 'package:list_ext/list_ext.dart';
 
-/// Screen for game process.
+import 'round_timer_view.dart';
+
+/// Round of the game.
 ///
-/// Shows question and timer.
-class GameScreen extends StatefulWidget {
+/// Screen for game process. Shows question and timer.
+class RoundScreen extends StatefulWidget {
   final Round round;
 
-  const GameScreen({Key key, @required this.round})
+  const RoundScreen({Key key, @required this.round})
       : assert(round != null),
         super(key: key);
 
   @override
-  _GameScreenState createState() => _GameScreenState();
+  _RoundScreenState createState() => _RoundScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> {
+class _RoundScreenState extends State<RoundScreen> {
   Question _currentQuestion;
 
   @override
@@ -37,7 +38,7 @@ class _GameScreenState extends State<GameScreen> {
     final index = list.indexOf(question);
     final isFirst = index == 0;
     final isLast = index == list.length - 1;
-    return _GameScreenContent(
+    return _RoundScreenContent(
       question: question,
       onPrevPressed: isFirst
           ? null
@@ -65,12 +66,12 @@ class _GameScreenState extends State<GameScreen> {
   }
 }
 
-class _GameScreenContent extends StatefulWidget {
+class _RoundScreenContent extends StatefulWidget {
   final Question question;
   final VoidCallback onPrevPressed;
   final VoidCallback onNextPressed;
 
-  const _GameScreenContent(
+  const _RoundScreenContent(
       {Key key,
       @required this.question,
       @required this.onPrevPressed,
@@ -79,10 +80,10 @@ class _GameScreenContent extends StatefulWidget {
         super(key: key);
 
   @override
-  _GameScreenContentState createState() => _GameScreenContentState();
+  _RoundScreenContentState createState() => _RoundScreenContentState();
 }
 
-class _GameScreenContentState extends State<_GameScreenContent> {
+class _RoundScreenContentState extends State<_RoundScreenContent> {
   bool _isShowAnswer = false;
 
   @override
