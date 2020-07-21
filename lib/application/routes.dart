@@ -1,3 +1,4 @@
+import 'package:WhatWhereWhenMaster/models/models.dart';
 import 'package:WhatWhereWhenMaster/screens/game/game_screen.dart';
 import 'package:WhatWhereWhenMaster/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class AppRoutes {
       case AppRoutes.home:
         return HomeScreen();
       case AppRoutes.game:
-        return GameScreen();
+        assert(args is GameData);
+        return GameScreen(game: args);
     }
 
     throw Exception('Unknown route: $route');
