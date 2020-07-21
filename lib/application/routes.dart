@@ -22,12 +22,17 @@ class AppRoutes {
     throw Exception('Unknown route: $route');
   }
 
-  /// Создает [Route] по строке пути.
+  /// Creates [Route] by path string.
   static Route<T> createRoute<T>(String route, {RouteSettings settings}) {
-    return MaterialPageRoute(
+    return create<T>(
         builder: (ctx) =>
             AppRoutes.buildByRoute(ctx, route, settings.arguments),
         settings: settings);
+  }
+
+  /// Creates default route with builder.
+  static Route<T> create<T>({WidgetBuilder builder, RouteSettings settings}) {
+    return MaterialPageRoute(builder: builder, settings: settings);
   }
 
   AppRoutes._();
