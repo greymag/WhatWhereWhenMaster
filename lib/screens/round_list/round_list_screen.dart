@@ -1,7 +1,8 @@
 import 'package:WhatWhereWhenMaster/application/localization.dart';
+import 'package:WhatWhereWhenMaster/application/routes.dart';
 import 'package:WhatWhereWhenMaster/models/round/round.dart';
+import 'package:WhatWhereWhenMaster/screens/round/round_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:innim_lib/innim_lib.dart';
 
 /// List of game rounds.
 class RoundListScreen extends StatelessWidget {
@@ -26,8 +27,9 @@ class RoundListScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
             onTap: () {
-              // TODO: navigate to round view
-              debugLog("Tap on $round");
+              Navigator.of(context).push(AppRoutes.create(
+                builder: (context) => RoundScreen(round: round),
+              ));
             },
           ),
       ],
