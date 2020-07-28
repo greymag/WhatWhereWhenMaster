@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 /// App routes.
 class AppRoutes {
   /// See [HomeScreen].
-  static const home = "/";
+  static const home = '/';
 
   /// See [GameScreen].
-  static const game = "/game";
+  static const game = '/game';
 
   /// Строит основной контент по пути.
   static Widget buildByRoute(BuildContext context, String route, Object args) {
@@ -18,7 +18,7 @@ class AppRoutes {
         return HomeScreen();
       case AppRoutes.game:
         assert(args is GameData);
-        return GameScreen(game: args);
+        return GameScreen(game: args as GameData);
     }
 
     throw Exception('Unknown route: $route');
@@ -34,7 +34,7 @@ class AppRoutes {
 
   /// Creates default route with builder.
   static Route<T> create<T>({WidgetBuilder builder, RouteSettings settings}) {
-    return MaterialPageRoute(builder: builder, settings: settings);
+    return MaterialPageRoute<T>(builder: builder, settings: settings);
   }
 
   AppRoutes._();

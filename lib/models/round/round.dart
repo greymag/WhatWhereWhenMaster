@@ -28,6 +28,7 @@ class Round extends Mappable {
 
   const Round({@required this.number, this.name, @required this.questions})
       : assert(number != null && number >= 0),
+        // ignore: prefer_is_empty
         assert(questions != null && questions.length > 0);
 
   factory Round.fromJson(Map<String, dynamic> json) => _$RoundFromJson(json);

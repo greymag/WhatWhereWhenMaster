@@ -17,7 +17,7 @@ class GameTab extends StatelessWidget {
     return Navigator(
       onGenerateRoute: (settings) {
         if (settings.name == Navigator.defaultRouteName) {
-          return AppRoutes.create(
+          return AppRoutes.create<Object>(
             builder: (context) => RoundListScreen(rounds: game.rounds),
             settings: settings,
           );

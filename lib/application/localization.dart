@@ -45,75 +45,76 @@ class AppLocalizations {
 
   AppLocalizations(this.locale) : assert(locale != null);
 
-  String get gameTitle => Intl.message('Выберите раунд', name: "gameTitle");
+  String get gameTitle => Intl.message('Выберите раунд', name: 'gameTitle');
 
   String get bottomNavigationTabGame =>
-      Intl.message('Игра', name: "bottomNavigationTabGame");
+      Intl.message('Игра', name: 'bottomNavigationTabGame');
 
   String get bottomNavigationTabNotes =>
-      Intl.message('Заметки', name: "bottomNavigationTabNotes");
+      Intl.message('Заметки', name: 'bottomNavigationTabNotes');
 
   String get bottomNavigationTabRules =>
-      Intl.message('Правила', name: "bottomNavigationTabRules");
+      Intl.message('Правила', name: 'bottomNavigationTabRules');
 
-  String get answerTitle => Intl.message('Ответ', name: "answerTitle");
+  String get answerTitle => Intl.message('Ответ', name: 'answerTitle');
 
   String getAlternativeAnswer(String value) => Intl.message(
         '($value)',
-        name: "getAlternativeAnswer",
+        name: 'getAlternativeAnswer',
         args: [value],
       );
 
   String getCommentText(String comment) => Intl.message(
         'Комментарий: $comment',
-        name: "getCommentText",
+        name: 'getCommentText',
         args: [comment],
       );
 
   String getRoundTitle(Round round, int totalCounts) {
     if (round.name?.isNotEmpty ?? false) return round.name;
 
-    if (round.number == 0)
+    if (round.number == 0) {
       return warmUpRoundTitle;
-    else if (round.number == totalCounts - 1)
+    } else if (round.number == totalCounts - 1) {
       // TODO: remove this, should require name or separate bool for such round
       return reserveRoundTitle;
-    else
+    } else {
       return getRoundNumberTitle(round.number.toRomanNumeralString());
+    }
   }
 
   String get warmUpRoundTitle =>
-      Intl.message('Разминка', name: "warmUpRoundTitle");
+      Intl.message('Разминка', name: 'warmUpRoundTitle');
 
   String get reserveRoundTitle =>
-      Intl.message('Резерв', name: "reserveRoundTitle");
+      Intl.message('Резерв', name: 'reserveRoundTitle');
 
   String getRoundNumberTitle(String romanNumber) => Intl.message(
         'Раунд $romanNumber',
-        name: "getRoundNumberTitle",
+        name: 'getRoundNumberTitle',
         args: [romanNumber],
       );
 
   String getQuestionTitle(int questionNum, int totalCounts) {
     return Intl.message(
       'Вопрос $questionNum из $totalCounts',
-      name: "getQuestionTitle",
+      name: 'getQuestionTitle',
       args: [questionNum, totalCounts],
     );
   }
 
-  String get prevQuestionBtn => Intl.message('Назад', name: "prevQuestionBtn");
+  String get prevQuestionBtn => Intl.message('Назад', name: 'prevQuestionBtn');
 
-  String get nextQuestionBtn => Intl.message('Далее', name: "nextQuestionBtn");
+  String get nextQuestionBtn => Intl.message('Далее', name: 'nextQuestionBtn');
 
   String get showAnswerBtn =>
-      Intl.message('Показать ответ', name: "showAnserBtn");
+      Intl.message('Показать ответ', name: 'showAnserBtn');
 
-  String get timerResetBtn => Intl.message('Сбросить', name: "timerResetBtn");
+  String get timerResetBtn => Intl.message('Сбросить', name: 'timerResetBtn');
 
-  String get timerStartBtn => Intl.message('Старт', name: "timerStartBtn");
+  String get timerStartBtn => Intl.message('Старт', name: 'timerStartBtn');
 
-  String get timerStopBtn => Intl.message('Стоп', name: "timerStopBtn");
+  String get timerStopBtn => Intl.message('Стоп', name: 'timerStopBtn');
 
   String getTimerValue(Duration duration) {
     final seconds = (duration.inMilliseconds / 1000.0).round();
@@ -125,7 +126,7 @@ class AppLocalizations {
 
   String getTimeStr(String mm, String ss) => Intl.message(
         '$mm:$ss',
-        name: "getTimeStr",
+        name: 'getTimeStr',
         args: [mm, ss],
       );
 

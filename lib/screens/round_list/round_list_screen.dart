@@ -31,7 +31,7 @@ class RoundListScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
               onTap: () {
-                Navigator.of(context).push(AppRoutes.create(
+                Navigator.of(context).push(AppRoutes.create<Object>(
                   builder: (context) => RoundScreen(round: round),
                 ));
               },
