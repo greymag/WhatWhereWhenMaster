@@ -17,7 +17,7 @@ class WwwMasterApp extends StatelessWidget {
   WwwMasterApp() {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    BlocSupervisor.delegate = _ApplicationBlocDelegate();
+    Bloc.observer = _ApplicationBlocDelegate();
   }
 
   @override
@@ -49,7 +49,7 @@ class WwwMasterApp extends StatelessWidget {
 }
 
 /// Вспомогательный класс, для глобального отслеживания действия со всеми блоками
-class _ApplicationBlocDelegate extends BlocDelegate {
+class _ApplicationBlocDelegate extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     debugLog('$bloc: $transition');
@@ -57,8 +57,8 @@ class _ApplicationBlocDelegate extends BlocDelegate {
   }
 
   @override
-  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
-    super.onError(bloc, error, stacktrace);
-    debugError('️Error:\n$error. Stacktrace: $stacktrace');
+  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
+    super.onError(cubit, error, stackTrace);
+    debugError('️Error:\n$error. Stacktrace: $stackTrace');
   }
 }
