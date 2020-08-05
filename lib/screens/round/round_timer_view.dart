@@ -172,6 +172,8 @@ class _TimerValue extends StatelessWidget {
     return Text(
       loc.getTimerValue(duration),
       style: TextStyle(
+        fontSize: 100,
+        fontWeight: FontWeight.w200,
         color: isAlert ? _alertColor : null,
       ),
     );
@@ -189,8 +191,23 @@ class _TimerControlButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
-      child: child,
+    final textStyle = Theme.of(context).textTheme.button;
+    return RawMaterialButton(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: child,
+      ),
+      textStyle: textStyle.copyWith(
+        fontSize: 24,
+        fontWeight: FontWeight.normal,
+      ),
+      constraints: const BoxConstraints(minWidth: 150, minHeight: 150),
+      shape: CircleBorder(
+        side: BorderSide(
+          color: Colors.lightGreenAccent.shade400,
+          width: 2,
+        ),
+      ),
       onPressed: onPressed,
     );
   }
