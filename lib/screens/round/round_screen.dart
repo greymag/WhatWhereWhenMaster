@@ -119,17 +119,17 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FlatButton(
-                  child: Text(loc.prevQuestionBtn),
+                _ControlButton.wide(
+                  label: loc.prevQuestionBtn,
                   onPressed: widget.onPrevPressed,
                 ),
                 if (!_isShowAnswer)
-                  FlatButton(
-                    child: Text(loc.showAnswerBtn),
+                  _ControlButton(
+                    label: loc.showAnswerBtn,
                     onPressed: _showAnswer,
                   ),
-                FlatButton(
-                  child: Text(loc.nextQuestionBtn),
+                _ControlButton.wide(
+                  label: loc.nextQuestionBtn,
                   onPressed: widget.onNextPressed,
                 ),
               ],
@@ -151,5 +151,50 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
         _isShowAnswer = true;
       });
     }
+  }
+}
+
+class _ControlButton extends StatelessWidget {
+  final String label;
+  final EdgeInsets padding;
+  final VoidCallback onPressed;
+
+  const _ControlButton({
+    Key key,
+    @required this.onPressed,
+    @required this.label,
+    this.padding = const EdgeInsets.all(8.0),
+  })  : assert(label != null),
+        super(key: key);
+
+  factory _ControlButton.wide({
+    Key key,
+    @required VoidCallback onPressed,
+    @required String label,
+  }) =>
+      _ControlButton(
+        key: key,
+        onPressed: onPressed,
+        label: label,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Padding(
+        padding: padding,
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
+      ),
+      onPressed: onPressed,
+      textColor: Colors.white,
+      color: Colors.blue,
+    );
   }
 }
