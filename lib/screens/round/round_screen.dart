@@ -97,6 +97,15 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
   bool _isShowAnswer = false;
 
   @override
+  void didUpdateWidget(_RoundScreenContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.question != widget.question) {
+      _isShowAnswer = false;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final question = widget.question;
