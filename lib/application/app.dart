@@ -1,5 +1,7 @@
 import 'package:WhatWhereWhenMaster/application/routes.dart';
 import 'package:WhatWhereWhenMaster/application/theme.dart';
+import 'package:WhatWhereWhenMaster/blocs/app/app_bloc.dart';
+import 'package:WhatWhereWhenMaster/screens/launch/launch_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +24,61 @@ class WwwMasterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AppBloc()..shown(),
+      child: BlocBuilder<AppBloc, AppState>(
+        builder: (context, state) {
+          if (state is AppInitial ||
+              state is AppLoadInProgress ||
+              state is AppReadyInProgress ||
+              state is AppReadySuccess) {
+            return _buildLaunchApp();
+          }
+
+          if (state is AppLoadSuccess) {
+            return _buildMainApp(state);
+          }
+
+          debugAssertUnknownState(state);
+          return LoadingWidget();
+        },
+      ),
+    );
+  }
+
+  Widget _buildLaunchApp() {
+    return _buildApp(
+      home: const LaunchScreen(),
+    );
+  }
+
+  Widget _buildMainApp(AppLoadSuccess state) {
+    return _buildApp(
+      initialRoute: AppRoutes.home,
+      navigatorKey: _navigatorKey,
+      onGenerateRoute: _onGenerateRoute,
+    );
+  }
+
+  Widget _buildApp({
+    Widget home,
+    String initialRoute,
+    TransitionBuilder builder,
+    GlobalKey<NavigatorState> navigatorKey,
+    RouteFactory onGenerateRoute,
+    List<NavigatorObserver> navigatorObservers = const <NavigatorObserver>[],
+  }) {
     return MaterialApp(
       // TODO: title: '',
       theme: WwwMasterTheme.theme,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: _createLocalization(),
-      navigatorKey: _navigatorKey,
-      onGenerateRoute: _onGenerateRoute,
-      initialRoute: AppRoutes.home,
+      navigatorKey: navigatorKey,
+      onGenerateRoute: onGenerateRoute,
+      navigatorObservers: navigatorObservers,
+      builder: builder,
+      initialRoute: initialRoute,
+      home: home,
     );
   }
 
