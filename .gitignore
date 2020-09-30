@@ -48,3 +48,7 @@ app.*.map.json
 /.idea/**
 !/.idea/runConfigurations/
 !/.idea/runConfigurations/*
+
+# Firebase config
+google-services.json
+GoogleService-Info.plist
