@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:innim_lib/innim_lib.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
@@ -25,6 +26,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   Stream<AppState> _mapShownToState(AppShown event) async* {
     yield AppLoadInProgress();
+
+    await Future.wait([
+      Firebase.initializeApp(),
+    ]);
 
     yield AppReadyInProgress();
 
