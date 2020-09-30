@@ -1,6 +1,7 @@
 import 'package:WhatWhereWhenMaster/application/routes.dart';
 import 'package:WhatWhereWhenMaster/application/theme.dart';
 import 'package:WhatWhereWhenMaster/blocs/app/app_bloc.dart';
+import 'package:WhatWhereWhenMaster/blocs/auth/auth_bloc.dart';
 import 'package:WhatWhereWhenMaster/screens/launch/launch_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,6 +58,12 @@ class WwwMasterApp extends StatelessWidget {
       initialRoute: AppRoutes.home,
       navigatorKey: _navigatorKey,
       onGenerateRoute: _onGenerateRoute,
+      builder: (context, child) {
+        return _buildGlobalBlocs(
+          localizations: AppLocalizations.of(context),
+          builder: (context) => child,
+        );
+      },
     );
   }
 
@@ -79,6 +86,26 @@ class WwwMasterApp extends StatelessWidget {
       builder: builder,
       initialRoute: initialRoute,
       home: home,
+    );
+  }
+
+  Widget _buildGlobalBlocs({
+    @required WidgetBuilder builder,
+    @required AppLocalizations localizations,
+  }) {
+    assert(localizations != null);
+    assert(builder != null);
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc()..appStarted(),
+          lazy: false,
+        ),
+      ],
+      child: Builder(
+        builder: builder,
+      ),
     );
   }
 
