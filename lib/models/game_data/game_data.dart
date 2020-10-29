@@ -23,3 +23,29 @@ class GameData extends Mappable {
   @override
   String toString() => 'GameData(rounds: $rounds)';
 }
+
+/// Game data entry.
+///
+/// Model for a list of games, without full data
+/// (rounds, questions, etc).
+@JsonSerializable()
+class GameDataEntry extends Mappable {
+  /// Unique identifier.
+  final String uid;
+
+  /// Game title.
+  final String title;
+
+  const GameDataEntry({@required this.uid, @required this.title})
+      : assert(uid != null),
+        assert(title != null);
+
+  factory GameDataEntry.fromJson(Map<String, dynamic> json) =>
+      _$GameDataEntryFromJson(json);
+
+  @override
+  Map<String, Object> toJson() => _$GameDataEntryToJson(this);
+
+  @override
+  String toString() => 'GameDataEntry(uid: $uid, title: $title)';
+}
