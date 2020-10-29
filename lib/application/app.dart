@@ -2,6 +2,8 @@ import 'package:WhatWhereWhenMaster/application/routes.dart';
 import 'package:WhatWhereWhenMaster/application/theme.dart';
 import 'package:WhatWhereWhenMaster/blocs/app/app_bloc.dart';
 import 'package:WhatWhereWhenMaster/blocs/auth/auth_bloc.dart';
+import 'package:WhatWhereWhenMaster/repositories/game/game_firestore_provider.dart';
+import 'package:WhatWhereWhenMaster/repositories/repositories.dart';
 import 'package:WhatWhereWhenMaster/screens/launch/launch_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,25 +27,43 @@ class WwwMasterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppBloc()..shown(),
-      child: BlocBuilder<AppBloc, AppState>(
-        builder: (context, state) {
-          if (state is AppInitial ||
-              state is AppLoadInProgress ||
-              state is AppReadyInProgress ||
-              state is AppReadySuccess) {
-            return _buildLaunchApp();
-          }
+    return _buildRepositories(
+      context,
+      child: BlocProvider(
+        create: (context) => AppBloc()..shown(),
+        child: BlocBuilder<AppBloc, AppState>(
+          builder: (context, state) {
+            if (state is AppInitial ||
+                state is AppLoadInProgress ||
+                state is AppReadyInProgress ||
+                state is AppReadySuccess) {
+              return _buildLaunchApp();
+            }
 
-          if (state is AppLoadSuccess) {
-            return _buildMainApp(state);
-          }
+            if (state is AppLoadSuccess) {
+              return _buildMainApp(state);
+            }
 
-          debugAssertUnknownState(state);
-          return LoadingWidget();
-        },
+            debugAssertUnknownState(state);
+            return LoadingWidget();
+          },
+        ),
       ),
+    );
+  }
+
+  Widget _buildRepositories(BuildContext context, {@required Widget child}) {
+    assert(context != null);
+    assert(child != null);
+    // TODO: move to DI
+    final gameProvider = GameFirestoreProvider();
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<GameRepository>(
+          create: (context) => GameRepository(gameProvider),
+        ),
+      ],
+      child: child,
     );
   }
 
