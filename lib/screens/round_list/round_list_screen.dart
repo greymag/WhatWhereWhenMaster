@@ -28,7 +28,7 @@ class RoundListScreen extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               title: Text(
                 loc.getRoundTitle(round, roundsCount),
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
               onTap: () {
                 Navigator.of(context).push(AppRoutes.create<Object>(

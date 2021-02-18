@@ -59,7 +59,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     }
 
-    _authSubscription = _auth.authStateChanges().listen((User user) {
+    _authSubscription = _auth.authStateChanges().listen((user) {
       if (user == null) {
         signedOut();
       } else {

@@ -139,10 +139,10 @@ class _RunningTimerValue extends StatefulWidget {
 class _RunningTimerValueState extends State<_RunningTimerValue> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<CountdownTimer>(
       stream: widget.timer,
       initialData: widget.timer,
-      builder: (context, AsyncSnapshot<CountdownTimer> snapshot) {
+      builder: (context, snapshot) {
         // TODO: alert sound
         return _TimerValue(
           duration: snapshot.data.remaining,

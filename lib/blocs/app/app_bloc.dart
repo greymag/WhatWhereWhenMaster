@@ -11,7 +11,7 @@ part 'app_state.dart';
 
 /// Application business logic.
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc() : super(AppInitial());
+  AppBloc() : super(const AppInitial());
 
   @override
   Stream<AppState> mapEventToState(AppEvent event) async* {
@@ -25,21 +25,21 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   Stream<AppState> _mapShownToState(AppShown event) async* {
-    yield AppLoadInProgress();
+    yield const AppLoadInProgress();
 
     await Future.wait([
       Firebase.initializeApp(),
     ]);
 
-    yield AppReadyInProgress();
+    yield const AppReadyInProgress();
 
     // TODO: ability to delay AppReadySuccess
 
-    yield AppReadySuccess();
+    yield const AppReadySuccess();
   }
 
   Stream<AppState> _mapLaunchScreenHiddenToState(
       AppLaunchScreenHidden event) async* {
-    yield AppLoadSuccess();
+    yield const AppLoadSuccess();
   }
 }

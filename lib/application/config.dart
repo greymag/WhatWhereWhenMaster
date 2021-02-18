@@ -16,13 +16,14 @@ class AppConfig extends InheritedWidget {
   /// незаконченный фукнционал, например верстка экранов.
   final bool isDemo;
 
-  AppConfig({
+  const AppConfig({
+    Key key,
     /*@required this.apiUrl, */ @required Widget child,
     this.isDemo = false,
   })  :
         //assert(apiUrl != null),
         assert(isDemo != null),
-        super(child: child);
+        super(key: key, child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => false;

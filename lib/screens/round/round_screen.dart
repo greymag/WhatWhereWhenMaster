@@ -195,7 +195,7 @@ class _ControlButton extends StatelessWidget {
         padding: padding,
         child: Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w300,
           ),

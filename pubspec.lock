@@ -450,6 +450,13 @@ packages:
       url: "http://git.innim.ru:1414/flutter/plugins/"
     source: git
     version: "0.2.32"
+  innim_lint:
+    dependency: "direct dev"
+    description:
+      name: innim_lint
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.7+1"
   innim_remote_error:
     dependency: transitive
     description:
@@ -607,7 +614,7 @@ packages:
     source: hosted
     version: "0.1.4"
   pedantic:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: pedantic
       url: "https://pub.dartlang.org"

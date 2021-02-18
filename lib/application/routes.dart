@@ -15,7 +15,7 @@ class AppRoutes {
   static Widget buildByRoute(BuildContext context, String route, Object args) {
     switch (route) {
       case AppRoutes.home:
-        return HomeScreen();
+        return const HomeScreen();
       case AppRoutes.game:
         assert(args is GameData);
         return GameScreen(game: args as GameData);

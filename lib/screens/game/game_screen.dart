@@ -39,16 +39,16 @@ class _GameScreenState extends State<GameScreen> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.casino),
-            title: Text(loc.bottomNavigationTabGame),
+            icon: const Icon(Icons.casino),
+            label: loc.bottomNavigationTabGame,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.comment),
-            title: Text(loc.bottomNavigationTabNotes),
+            icon: const Icon(Icons.comment),
+            label: loc.bottomNavigationTabNotes,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.gavel),
-            title: Text(loc.bottomNavigationTabRules),
+            icon: const Icon(Icons.gavel),
+            label: loc.bottomNavigationTabRules,
           ),
         ],
       ),

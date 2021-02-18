@@ -1,9 +1,6 @@
-include: package:pedantic/analysis_options.yaml
+include: package:innim_lint/analysis_options.yaml
 
 analyzer:
-  exclude: 
+  exclude:
     - "lib/application/l10n/**"
     - "**/*.g.dart"
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false

@@ -31,7 +31,7 @@ class AppLaunchScreenHidden extends AppEvent {
 }
 
 extension AppBlocEventsExtension on AppBloc {
-  void shown() => add(AppShown());
+  void shown() => add(const AppShown());
 
-  void launchScreenHidden() => add(AppLaunchScreenHidden());
+  void launchScreenHidden() => add(const AppLaunchScreenHidden());
 }

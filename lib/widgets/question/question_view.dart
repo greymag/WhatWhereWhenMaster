@@ -51,7 +51,7 @@ class QuestionView extends StatelessWidget {
       children: [
         Text(
           loc.answerTitle,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
@@ -63,7 +63,7 @@ class QuestionView extends StatelessWidget {
         if (question.hasAlternativeAnswer)
           Text(
             loc.getAlternativeAnswer(question.answerAlt),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -72,7 +72,7 @@ class QuestionView extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               loc.getCommentText(question.comment),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontStyle: FontStyle.italic,
               ),

@@ -7,6 +7,8 @@ import 'package:innim_ui/innim_ui.dart';
 
 /// Home screen.
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

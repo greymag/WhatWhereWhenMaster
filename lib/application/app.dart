@@ -19,7 +19,7 @@ import 'localization.dart';
 class WwwMasterApp extends StatelessWidget {
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
-  WwwMasterApp() {
+  WwwMasterApp({Key key}) : super(key: key) {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     Bloc.observer = _ApplicationBlocDelegate();
