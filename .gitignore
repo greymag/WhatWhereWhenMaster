@@ -52,3 +52,6 @@ app.*.map.json
 # Firebase config
 google-services.json
 GoogleService-Info.plist
+
+# FVM
+.fvm/flutter_sdk
