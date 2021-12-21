@@ -1,4 +1,4 @@
-name: WhatWhereWhenMaster
+name: what_where_when_master
 description: An application for master of "What? Where? When?" game.
 
 publish_to: "none"
@@ -9,12 +9,16 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  cloud_firestore: ^3.1.5
+  cupertino_icons: ^1.0.0
+  firebase_analytics: ^9.0.4
+  firebase_auth: ^3.3.4
+  firebase_core: ^1.10.6
   flutter:
     sdk: flutter
+  flutter_bloc: ^7.0.0
   flutter_localizations:
     sdk: flutter
-  flutter_bloc: ^7.0.0
-  intl: ^0.17.0
   innim_lib:
     git:
       url: http://git.innim.ru:1414/flutter/plugins/
@@ -25,22 +29,18 @@ dependencies:
       url: http://git.innim.ru:1414/flutter/plugins/
       path: packages/ui/innim_ui
       ref: innim_ui/0.5
-  multiple_localization: ^0.2.2
+  intl: ^0.17.0
   json_annotation: ^4.4.0
+  multiple_localization: ^0.2.2
   numerus: ^1.0.2
   quiver: ^3.0.1+1
-  cupertino_icons: ^1.0.0
-  firebase_core: ^1.10.6
-  firebase_analytics: ^9.0.4
-  firebase_auth: ^3.3.4
-  cloud_firestore: ^3.1.5
 
 dev_dependencies:
+  build_runner: ^2.1.7
   flutter_test:
     sdk: flutter
-  json_serializable: ^6.1.0
-  build_runner: ^2.1.7
   innim_lint: ^0.2.0
+  json_serializable: ^6.1.0
 
 flutter:
   uses-material-design: true

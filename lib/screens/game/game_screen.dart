@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:WhatWhereWhenMaster/application/localization.dart';
-import 'package:WhatWhereWhenMaster/models/models.dart';
+import 'package:what_where_when_master/application/localization.dart';
+import 'package:what_where_when_master/models/models.dart';
 
 import 'game_tab.dart';
 

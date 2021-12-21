@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:WhatWhereWhenMaster/blocs/auth/auth_bloc.dart';
-import 'package:WhatWhereWhenMaster/models/game_data/game_data.dart';
-import 'package:WhatWhereWhenMaster/repositories/repositories.dart';
+import 'package:what_where_when_master/blocs/auth/auth_bloc.dart';
+import 'package:what_where_when_master/models/game_data/game_data.dart';
+import 'package:what_where_when_master/repositories/repositories.dart';
 import 'package:bloc/bloc.dart';
 import 'package:innim_lib/innim_lib.dart';
 import 'package:meta/meta.dart';

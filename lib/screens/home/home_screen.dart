@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:WhatWhereWhenMaster/models/models.dart';
-import 'package:WhatWhereWhenMaster/screens/game/game_screen.dart';
+import 'package:what_where_when_master/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:innim_ui/innim_ui.dart';
+import 'package:what_where_when_master/screens/game/game_screen.dart';
 
 /// Home screen.
 class HomeScreen extends StatefulWidget {

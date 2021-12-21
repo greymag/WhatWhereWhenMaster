@@ -1,5 +1,5 @@
-import 'package:WhatWhereWhenMaster/models/game_data/game_data.dart';
-import 'package:WhatWhereWhenMaster/repositories/game/game_firestore_provider.dart';
+import 'package:what_where_when_master/models/game_data/game_data.dart';
+import 'package:what_where_when_master/repositories/game/game_firestore_provider.dart';
 import 'package:async/async.dart';
 
 /// Repository for working with [GameData].
