@@ -22,7 +22,7 @@ class WwwMasterApp extends StatelessWidget {
   WwwMasterApp({Key key}) : super(key: key) {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    Bloc.observer = _ApplicationBlocDelegate();
+    Bloc.observer = _ApplicationBlocObserver(logEnabled: false);
   }
 
   @override
@@ -45,7 +45,7 @@ class WwwMasterApp extends StatelessWidget {
             }
 
             debugAssertUnknownState(state);
-            return LoadingWidget();
+            return const LoadingWidget();
           },
         ),
       ),
@@ -144,17 +144,34 @@ class WwwMasterApp extends StatelessWidget {
   }
 }
 
-/// Вспомогательный класс, для глобального отслеживания действия со всеми блоками
-class _ApplicationBlocDelegate extends BlocObserver {
+class _ApplicationBlocObserver extends BlocObserver {
+  final bool logEnabled;
+
+  _ApplicationBlocObserver({this.logEnabled = false});
+
   @override
   void onTransition(Bloc bloc, Transition transition) {
-    debugLog('$bloc: $transition');
+    if (logEnabled) _logTransition(bloc, transition);
     super.onTransition(bloc, transition);
   }
 
   @override
-  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
-    super.onError(cubit, error, stackTrace);
-    debugError('️Error:\n$error. Stacktrace: $stackTrace');
+  void onError(BlocBase bloc, Object error, StackTrace stacktrace) {
+    super.onError(bloc, error, stacktrace);
+    debugError('️Error:\n$error. Stacktrace: $stacktrace');
+  }
+
+  void _logTransition(Bloc bloc, Transition transition) {
+    final title = '================= [ ${bloc.runtimeType} ] =================';
+    final now = DateTime.now();
+    final separator = List.generate(title.length, (index) => '=').join();
+    debugLog('''
+$title
+Date      : ${now.toIso8601String()}
+Event     : ${transition.event}
+Prev state: ${transition.currentState}
+Next state: ${transition.nextState}
+$separator
+''');
   }
 }

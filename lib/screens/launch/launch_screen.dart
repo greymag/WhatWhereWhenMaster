@@ -8,19 +8,19 @@ class LaunchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _checkState(context, context.bloc<AppBloc>().state);
+    _checkState(context, context.read<AppBloc>().state);
 
     return Scaffold(
       body: BlocListener<AppBloc, AppState>(
         listener: _checkState,
-        child: LoadingWidget(),
+        child: const LoadingWidget(),
       ),
     );
   }
 
   void _checkState(BuildContext context, AppState state) {
     if (state is AppReadySuccess) {
-      context.bloc<AppBloc>().launchScreenHidden();
+      context.read<AppBloc>().launchScreenHidden();
     }
   }
 }

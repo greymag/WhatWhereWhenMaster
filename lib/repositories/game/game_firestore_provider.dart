@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class GameFirestoreProvider {
   static const _path = 'games';
 
-  CollectionReference _collection;
+  CollectionReference<Map<String, Object>> _collection;
 
   /// Returns list of saved games entries.
   Future<Result<List<GameDataEntry>>> getAll() async {
@@ -16,10 +16,10 @@ class GameFirestoreProvider {
   }
 
   @protected
-  CollectionReference get collection =>
+  CollectionReference<Map<String, Object>> get collection =>
       _collection ??= FirebaseFirestore.instance.collection(_path);
 
-  GameDataEntry _fromDoc(QueryDocumentSnapshot doc) {
+  GameDataEntry _fromDoc(QueryDocumentSnapshot<Map<String, Object>> doc) {
     return GameDataEntry.fromJson(<String, Object>{
       'uid': doc.id,
       ...doc.data(),

@@ -54,7 +54,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           yield const AuthSignOutSuccess();
         }
       } catch (e) {
-        logError('Anonymous sign in failed: $e');
+        // logError('Anonymous sign in failed: $e');
         yield const AuthSignOutSuccess();
       }
     }

@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: BlocProvider(
         create: (context) =>
-            HomeBloc(context.bloc(), context.repository())..started(),
+            HomeBloc(context.read(), context.read())..started(),
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             if (state is HomeLoadSuccess) {
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     state is HomeLoadInProgress ||
                     state is HomeSignInRequired,
                 state);
-            return LoadingWidget();
+            return const LoadingWidget();
           },
         ),
       ),

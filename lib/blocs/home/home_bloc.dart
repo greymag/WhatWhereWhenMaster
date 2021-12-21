@@ -31,7 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapStartedToState(HomeStarted event) async* {
-    await for (final state in auth) {
+    await for (final state in auth.stream) {
       if (state is! AuthSignInSuccess) {
         yield const HomeSignInRequired();
       } else {
