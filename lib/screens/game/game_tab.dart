@@ -1,8 +1,8 @@
-import 'package:WhatWhereWhenMaster/application/routes.dart';
+import 'package:what_where_when_master/application/routes.dart';
 import 'package:flutter/material.dart';
 
-import 'package:WhatWhereWhenMaster/models/game_data/game_data.dart';
-import 'package:WhatWhereWhenMaster/screens/round_list/round_list_screen.dart';
+import 'package:what_where_when_master/models/game_data/game_data.dart';
+import 'package:what_where_when_master/screens/round_list/round_list_screen.dart';
 
 /// Game tab for a [GameScreen].
 class GameTab extends StatelessWidget {

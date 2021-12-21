@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:innim_lib/innim_lib.dart';
 
-import 'package:WhatWhereWhenMaster/models/question/question.dart';
+import 'package:what_where_when_master/models/question/question.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'round.g.dart';

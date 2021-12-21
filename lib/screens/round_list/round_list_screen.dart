@@ -1,7 +1,7 @@
-import 'package:WhatWhereWhenMaster/application/localization.dart';
-import 'package:WhatWhereWhenMaster/application/routes.dart';
-import 'package:WhatWhereWhenMaster/models/round/round.dart';
-import 'package:WhatWhereWhenMaster/screens/round/round_screen.dart';
+import 'package:what_where_when_master/application/localization.dart';
+import 'package:what_where_when_master/application/routes.dart';
+import 'package:what_where_when_master/models/round/round.dart';
+import 'package:what_where_when_master/screens/round/round_screen.dart';
 import 'package:flutter/material.dart';
 
 /// List of game rounds.

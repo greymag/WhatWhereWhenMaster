@@ -1,4 +1,4 @@
-import 'package:WhatWhereWhenMaster/models/game_data/game_data.dart';
+import 'package:what_where_when_master/models/game_data/game_data.dart';
 import 'package:meta/meta.dart';
 import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

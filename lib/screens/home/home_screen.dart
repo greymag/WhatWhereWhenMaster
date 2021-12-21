@@ -1,5 +1,5 @@
-import 'package:WhatWhereWhenMaster/blocs/home/home_bloc.dart';
-import 'package:WhatWhereWhenMaster/models/models.dart';
+import 'package:what_where_when_master/blocs/home/home_bloc.dart';
+import 'package:what_where_when_master/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:innim_lib/innim_lib.dart';

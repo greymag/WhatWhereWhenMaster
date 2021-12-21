@@ -1,10 +1,10 @@
-import 'package:WhatWhereWhenMaster/application/routes.dart';
-import 'package:WhatWhereWhenMaster/application/theme.dart';
-import 'package:WhatWhereWhenMaster/blocs/app/app_bloc.dart';
-import 'package:WhatWhereWhenMaster/blocs/auth/auth_bloc.dart';
-import 'package:WhatWhereWhenMaster/repositories/game/game_firestore_provider.dart';
-import 'package:WhatWhereWhenMaster/repositories/repositories.dart';
-import 'package:WhatWhereWhenMaster/screens/launch/launch_screen.dart';
+import 'package:what_where_when_master/application/routes.dart';
+import 'package:what_where_when_master/application/theme.dart';
+import 'package:what_where_when_master/blocs/app/app_bloc.dart';
+import 'package:what_where_when_master/blocs/auth/auth_bloc.dart';
+import 'package:what_where_when_master/repositories/game/game_firestore_provider.dart';
+import 'package:what_where_when_master/repositories/repositories.dart';
+import 'package:what_where_when_master/screens/launch/launch_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

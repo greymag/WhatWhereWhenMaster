@@ -1,4 +1,4 @@
-import 'package:WhatWhereWhenMaster/models/models.dart';
+import 'package:what_where_when_master/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:multiple_localization/multiple_localization.dart';

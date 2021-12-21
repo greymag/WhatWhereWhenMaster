@@ -1,6 +1,6 @@
-import 'package:WhatWhereWhenMaster/models/models.dart';
-import 'package:WhatWhereWhenMaster/screens/game/game_screen.dart';
-import 'package:WhatWhereWhenMaster/screens/home/home_screen.dart';
+import 'package:what_where_when_master/models/models.dart';
+import 'package:what_where_when_master/screens/game/game_screen.dart';
+import 'package:what_where_when_master/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 /// App routes.

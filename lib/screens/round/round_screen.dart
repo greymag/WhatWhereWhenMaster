@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:list_ext/list_ext.dart';
 
-import 'package:WhatWhereWhenMaster/application/localization.dart';
-import 'package:WhatWhereWhenMaster/models/models.dart';
-import 'package:WhatWhereWhenMaster/widgets/question/question_view.dart';
+import 'package:what_where_when_master/application/localization.dart';
+import 'package:what_where_when_master/models/models.dart';
+import 'package:what_where_when_master/widgets/question/question_view.dart';
 
 import 'round_timer_view.dart';
 

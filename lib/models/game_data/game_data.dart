@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:innim_lib/innim_lib.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:WhatWhereWhenMaster/models/round/round.dart';
+import 'package:what_where_when_master/models/round/round.dart';
 
 part 'game_data.g.dart';
 

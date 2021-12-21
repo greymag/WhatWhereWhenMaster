@@ -1,5 +1,5 @@
-import 'package:WhatWhereWhenMaster/application/localization.dart';
-import 'package:WhatWhereWhenMaster/models/question/question.dart';
+import 'package:what_where_when_master/application/localization.dart';
+import 'package:what_where_when_master/models/question/question.dart';
 import 'package:flutter/material.dart';
 
 /// Widget for display question

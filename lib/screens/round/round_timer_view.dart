@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:quiver/async.dart';
 
-import 'package:WhatWhereWhenMaster/application/localization.dart';
+import 'package:what_where_when_master/application/localization.dart';
 
 /// Timer for round view.
 class RoundTimerView extends StatefulWidget {
