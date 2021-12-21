@@ -60,12 +60,58 @@ class _GameScreenState extends State<GameScreen> {
       case 0:
         return GameTab(game: widget.game);
       case 1:
-        return Container();
+        return const _TextContent(
+          text: '''
+Suspendisse potenti. Curabitur mattis malesuada auctor. Nullam viverra bibendum odio nec sollicitudin. Suspendisse potenti. Nam at consequat eros, vitae porttitor tortor. Morbi dui augue, pellentesque in venenatis sit amet, tincidunt id nibh. Mauris quis nibh eu neque pulvinar elementum. Nam urna erat, egestas sit amet nisl ut, pellentesque gravida dolor. Aliquam sit amet feugiat quam. Etiam aliquet erat at lacus scelerisque placerat. Nullam ullamcorper sodales mollis.
+
+Nunc velit enim, ultrices sit amet felis vel, venenatis pharetra nibh. Etiam laoreet dapibus orci quis imperdiet. Aenean at eleifend lacus. Pellentesque in tortor justo. Vestibulum volutpat odio vehicula velit elementum pharetra. Donec vitae ex vitae elit tincidunt laoreet. Donec ac leo ut dui vehicula molestie quis eu nulla. Curabitur id leo tempus, viverra magna sit amet, tincidunt nisi. Duis nec lorem vitae lorem pellentesque hendrerit eget a elit. Phasellus tincidunt dictum efficitur. Nam ullamcorper eros quis tincidunt tristique. Pellentesque convallis nunc ut tempor maximus. Proin eu commodo mi, sed tristique lacus. Ut sodales non arcu in imperdiet. Nunc efficitur pulvinar malesuada.''',
+        );
       case 2:
-        return Container();
+        return const _TextContent(
+          text: '''
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis felis neque, fermentum vel lorem in, vestibulum congue turpis. Proin ac eros vestibulum, fringilla neque eget, iaculis nisi. Integer luctus ac est eget ultricies. Duis vulputate ac neque nec rutrum. Mauris ut consequat velit. Aenean et convallis urna, eu pellentesque mauris. Maecenas ac nibh vitae turpis placerat accumsan. Fusce fringilla et diam faucibus feugiat. Cras cursus, massa ut aliquet fringilla, lectus felis molestie eros, sit amet rutrum lectus libero nec diam.
+
+Quisque at orci rutrum massa mattis dignissim. Curabitur facilisis id mi quis posuere. Pellentesque quis turpis viverra, ultrices libero non, vehicula purus. Vivamus rutrum interdum varius. Donec scelerisque tellus massa, finibus fermentum libero dapibus vel. Vestibulum dui mauris, sodales ac justo in, facilisis dapibus risus. Morbi sodales molestie sem, in dictum mi condimentum sed.
+
+Sed scelerisque vehicula lacus dignissim sodales. Nam tempus laoreet enim in condimentum. Ut vitae imperdiet orci, eu vestibulum magna. Nam semper purus nulla. Quisque eu dictum nunc. In a nibh orci. Cras pulvinar hendrerit nisi, id commodo sapien suscipit in. In commodo vestibulum fringilla. Vivamus rhoncus rutrum maximus. Proin tempus in quam non varius. Duis volutpat, nunc a venenatis consectetur, ex mi eleifend libero, vel consectetur erat justo eget lacus. In ut consequat sem, in blandit mauris. Aliquam a elit aliquet nisi vulputate sagittis in a arcu. In sed mollis mauris.
+
+Suspendisse potenti. Curabitur mattis malesuada auctor. Nullam viverra bibendum odio nec sollicitudin. Suspendisse potenti. Nam at consequat eros, vitae porttitor tortor. Morbi dui augue, pellentesque in venenatis sit amet, tincidunt id nibh. Mauris quis nibh eu neque pulvinar elementum. Nam urna erat, egestas sit amet nisl ut, pellentesque gravida dolor. Aliquam sit amet feugiat quam. Etiam aliquet erat at lacus scelerisque placerat. Nullam ullamcorper sodales mollis.
+
+Nunc velit enim, ultrices sit amet felis vel, venenatis pharetra nibh. Etiam laoreet dapibus orci quis imperdiet. Aenean at eleifend lacus. Pellentesque in tortor justo. Vestibulum volutpat odio vehicula velit elementum pharetra. Donec vitae ex vitae elit tincidunt laoreet. Donec ac leo ut dui vehicula molestie quis eu nulla. Curabitur id leo tempus, viverra magna sit amet, tincidunt nisi. Duis nec lorem vitae lorem pellentesque hendrerit eget a elit. Phasellus tincidunt dictum efficitur. Nam ullamcorper eros quis tincidunt tristique. Pellentesque convallis nunc ut tempor maximus. Proin eu commodo mi, sed tristique lacus. Ut sodales non arcu in imperdiet. Nunc efficitur pulvinar malesuada.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis felis neque, fermentum vel lorem in, vestibulum congue turpis. Proin ac eros vestibulum, fringilla neque eget, iaculis nisi. Integer luctus ac est eget ultricies. Duis vulputate ac neque nec rutrum. Mauris ut consequat velit. Aenean et convallis urna, eu pellentesque mauris. Maecenas ac nibh vitae turpis placerat accumsan. Fusce fringilla et diam faucibus feugiat. Cras cursus, massa ut aliquet fringilla, lectus felis molestie eros, sit amet rutrum lectus libero nec diam.
+
+Quisque at orci rutrum massa mattis dignissim. Curabitur facilisis id mi quis posuere. Pellentesque quis turpis viverra, ultrices libero non, vehicula purus. Vivamus rutrum interdum varius. Donec scelerisque tellus massa, finibus fermentum libero dapibus vel. Vestibulum dui mauris, sodales ac justo in, facilisis dapibus risus. Morbi sodales molestie sem, in dictum mi condimentum sed.
+
+Sed scelerisque vehicula lacus dignissim sodales. Nam tempus laoreet enim in condimentum. Ut vitae imperdiet orci, eu vestibulum magna. Nam semper purus nulla. Quisque eu dictum nunc. In a nibh orci. Cras pulvinar hendrerit nisi, id commodo sapien suscipit in. In commodo vestibulum fringilla. Vivamus rhoncus rutrum maximus. Proin tempus in quam non varius. Duis volutpat, nunc a venenatis consectetur, ex mi eleifend libero, vel consectetur erat justo eget lacus. In ut consequat sem, in blandit mauris. Aliquam a elit aliquet nisi vulputate sagittis in a arcu. In sed mollis mauris.
+
+Suspendisse potenti. Curabitur mattis malesuada auctor. Nullam viverra bibendum odio nec sollicitudin. Suspendisse potenti. Nam at consequat eros, vitae porttitor tortor. Morbi dui augue, pellentesque in venenatis sit amet, tincidunt id nibh. Mauris quis nibh eu neque pulvinar elementum. Nam urna erat, egestas sit amet nisl ut, pellentesque gravida dolor. Aliquam sit amet feugiat quam. Etiam aliquet erat at lacus scelerisque placerat. Nullam ullamcorper sodales mollis.
+
+''',
+        );
     }
 
     assert(false, 'Unhandled tab index: $index');
     return Container();
+  }
+}
+
+class _TextContent extends StatelessWidget {
+  final String text;
+  const _TextContent({Key key, @required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 20),
+          ),
+        ),
+      ),
+    );
   }
 }
