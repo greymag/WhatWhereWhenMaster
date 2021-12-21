@@ -120,9 +120,12 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            QuestionView(
-              question: question,
-              showAnswer: _isShowAnswer,
+            Expanded(
+              child: QuestionView(
+                question: question,
+                showAnswer: _isShowAnswer,
+              ),
+              flex: 5,
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -143,11 +146,13 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
                 ),
               ],
             ),
+            const Spacer(flex: 1),
             RoundTimerView(
               value: const Duration(minutes: 1),
               alertRemaining: const Duration(seconds: 10),
               onTimerComplete: _showAnswer,
             ),
+            const Spacer(flex: 3),
           ],
         ),
       ),
