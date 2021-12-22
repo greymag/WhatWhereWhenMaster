@@ -58,14 +58,20 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   Widget _buildBodyByTab(BuildContext context, int index) {
+    final loc = AppLocalizations.of(context);
     switch (index) {
       case 0:
         return GameTab(game: widget.game);
       case 1:
         return const _Notes();
       case 2:
-        return const _TextContent(
-          text: '''
+        return Scaffold(
+          appBar: AppBar(
+            // TODO: another string
+            title: Text(loc.bottomNavigationTabRules),
+          ),
+          body: const _TextContent(
+            text: '''
 Открытый турнир Борисоглебского филиала ФГБОУ ВО «Воронежского государственного университета» по интеллектуальной игре «Что? Где? Когда?» среди школьников и студентов 
 
 Правила игры
@@ -92,6 +98,7 @@ class _GameScreenState extends State<GameScreen> {
 
 Мобильники зрителей
 ''',
+          ),
         );
     }
 
