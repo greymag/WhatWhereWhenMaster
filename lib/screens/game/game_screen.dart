@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:innim_ui/innim_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:what_where_when_master/application/localization.dart';
 import 'package:what_where_when_master/models/models.dart';
@@ -60,12 +62,7 @@ class _GameScreenState extends State<GameScreen> {
       case 0:
         return GameTab(game: widget.game);
       case 1:
-        return const _TextContent(
-          text: '''
-Suspendisse potenti. Curabitur mattis malesuada auctor. Nullam viverra bibendum odio nec sollicitudin. Suspendisse potenti. Nam at consequat eros, vitae porttitor tortor. Morbi dui augue, pellentesque in venenatis sit amet, tincidunt id nibh. Mauris quis nibh eu neque pulvinar elementum. Nam urna erat, egestas sit amet nisl ut, pellentesque gravida dolor. Aliquam sit amet feugiat quam. Etiam aliquet erat at lacus scelerisque placerat. Nullam ullamcorper sodales mollis.
-
-Nunc velit enim, ultrices sit amet felis vel, venenatis pharetra nibh. Etiam laoreet dapibus orci quis imperdiet. Aenean at eleifend lacus. Pellentesque in tortor justo. Vestibulum volutpat odio vehicula velit elementum pharetra. Donec vitae ex vitae elit tincidunt laoreet. Donec ac leo ut dui vehicula molestie quis eu nulla. Curabitur id leo tempus, viverra magna sit amet, tincidunt nisi. Duis nec lorem vitae lorem pellentesque hendrerit eget a elit. Phasellus tincidunt dictum efficitur. Nam ullamcorper eros quis tincidunt tristique. Pellentesque convallis nunc ut tempor maximus. Proin eu commodo mi, sed tristique lacus. Ut sodales non arcu in imperdiet. Nunc efficitur pulvinar malesuada.''',
-        );
+        return const _Notes();
       case 2:
         return const _TextContent(
           text: '''
@@ -120,5 +117,106 @@ class _TextContent extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _Notes extends StatefulWidget {
+  const _Notes({Key key}) : super(key: key);
+
+  @override
+  __NotesState createState() => __NotesState();
+}
+
+class __NotesState extends State<_Notes> {
+  static const _prefsKey = 'notesText';
+
+  SharedPreferences _prefs;
+  var _text = '';
+  bool _isPending = false;
+  bool _isEditing = false;
+
+  TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController();
+
+    _load();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        // TODO: another string
+        title: Text(loc.bottomNavigationTabNotes),
+        actions: [
+          if (_isEditing)
+            IconButton(
+              icon: const Icon(Icons.check),
+              onPressed: () async {
+                final text = _textController.text;
+                setState(() {
+                  _text = text;
+                  _isEditing = false;
+                });
+                await _prefs.setString(_prefsKey, _textController.text);
+              },
+            ),
+          if (!_isEditing && !_isPending)
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () async {
+                _textController.text = _text;
+                setState(() {
+                  _isEditing = true;
+                });
+              },
+            ),
+        ],
+      ),
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    if (_isPending) return const LoadingWidget();
+    if (_isEditing) return _buildEditing(context);
+    return _buildText(context, _text);
+  }
+
+  Widget _buildText(BuildContext context, String text) {
+    return _TextContent(text: text);
+  }
+
+  Widget _buildEditing(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: TextField(
+        autofocus: true,
+        controller: _textController,
+        minLines: null,
+        maxLines: null,
+        textCapitalization: TextCapitalization.sentences,
+        textInputAction: TextInputAction.newline,
+        expands: true,
+        decoration: const InputDecoration(focusedBorder: InputBorder.none),
+        style: const TextStyle(fontSize: 20),
+      ),
+    );
+  }
+
+  Future<void> _load() async {
+    _isPending = true;
+
+    _prefs ??= await SharedPreferences.getInstance();
+    final text = _prefs.getString(_prefsKey) ?? '';
+
+    setState(() {
+      _isPending = false;
+      _text = text;
+    });
   }
 }
