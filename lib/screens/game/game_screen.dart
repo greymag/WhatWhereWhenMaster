@@ -69,24 +69,31 @@ Nunc velit enim, ultrices sit amet felis vel, venenatis pharetra nibh. Etiam lao
       case 2:
         return const _TextContent(
           text: '''
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis felis neque, fermentum vel lorem in, vestibulum congue turpis. Proin ac eros vestibulum, fringilla neque eget, iaculis nisi. Integer luctus ac est eget ultricies. Duis vulputate ac neque nec rutrum. Mauris ut consequat velit. Aenean et convallis urna, eu pellentesque mauris. Maecenas ac nibh vitae turpis placerat accumsan. Fusce fringilla et diam faucibus feugiat. Cras cursus, massa ut aliquet fringilla, lectus felis molestie eros, sit amet rutrum lectus libero nec diam.
+Открытый турнир Борисоглебского филиала ФГБОУ ВО «Воронежского государственного университета» по интеллектуальной игре «Что? Где? Когда?» среди школьников и студентов 
 
-Quisque at orci rutrum massa mattis dignissim. Curabitur facilisis id mi quis posuere. Pellentesque quis turpis viverra, ultrices libero non, vehicula purus. Vivamus rutrum interdum varius. Donec scelerisque tellus massa, finibus fermentum libero dapibus vel. Vestibulum dui mauris, sodales ac justo in, facilisis dapibus risus. Morbi sodales molestie sem, in dictum mi condimentum sed.
+Правила игры
+1. Игра состоит из трёх туров по 10 вопросов в каждом.
+2. Игра проводится по упрощённым правилам спортивного «Что? Где? Когда?», кратко изложенным ниже.
+3. Задача команд — своевременно дать правильный ответ на вопрос, поставленный ведущим. За каждый правильный ответ команда получает одно игровое очко.
+4. Ответы даются в письменном виде на карточках для ответа, содержащих название команды, номер тура и номер вопроса.
+5. Ведущий объявляет номер вопроса, задаёт сам вопрос (для всех вопросов, кроме блиц-вопросов и музыкальных вопросов, текст вопроса озвучивается дважды) и произносит слово «Время», после чего начинается отсчёт чистого времени, равного 60 секундам. За 10 секунд до окончания минуты обсуждения даётся сигнал о том, что осталось 10 секунд. По окончании минуты обсуждения производится обратный отсчёт дополнительных 10 секунд, до истечения которых каждая команда обязана сдать карточку с ответом. Если у команды ответа нет, сдаётся пустая карточка.
+6. Блиц-вопрос состоит из преамбулы и двух или более мини-вопросов, на каждый из которых командам даётся определённое время. Суммарное время на все мини-вопросы составляет одну минуту. Преамбула включает информацию о том, что данный вопрос является блиц-вопросом, о числе мини-вопросов и о времени, которое даётся на каждый мини-вопрос. Ответы на все мини-вопросы блица записываются на одной карточке в том же порядке, в котором задаются мини-вопросы. Ответ на блиц-вопрос признаётся правильным, только если правильными признаются ответы на все мини-вопросы.
+7. Сдавшей ответ вовремя считается команда, капитан (игрок) которой поднял вверх руку с карточкой с ответом до истечения дополнительных 10 секунд.
+8. Ответы, сданные с опозданием, не рассматриваются.
+9. Ответ считается неправильным, если:
+- не раскрывает суть вопроса с достаточной степенью конкретизации (степень необходимой конкретизации определяется жюри);
+- форма ответа не соответствует форме вопроса;
+- команда сдала более одного варианта ответа, хотя бы один из которых неверен;
+- в ответе допущены грубые ошибки (неправильно названы имена, фамилии, названия, даты, способ действия и т.п.), искажающие или меняющие суть ответа.
+10. При наличии в ответе дополнительной информации собственно ответом считается фраза или слово, впрямую отвечающие форме вопроса. Неточности в дополнительной информации не учитываются, если они не меняют смысл ответа.
+11. Победителем объявляется команда, набравшая наибольшее количество игровых очков. В случае если несколько команд набрали одинаковое количество очков, места определяются по дополнительному показателю — суммарному рейтингу вопросов, на которые команда дала правильный ответ. Рейтинг вопроса равен числу команд, не ответивших на него, плюс один.
+12. Если несколько команд набрали наибольшее количество игровых очков и их суммарный рейтинг вопросов также одинаков, то для определения победителя между этими командами проводится «перестрелка» — команды отвечают на дополнительные вопросы до первой ошибки (команда, не ответившая на вопрос, выбывает из «перестрелки»; если неверный ответ дали все команды, то никто не выбывает). «Перестрелка» продолжается до тех пор, пока не останется только одна команда, верно ответившая на все дополнительные вопросы, которая и объявляется победителем.
 
-Sed scelerisque vehicula lacus dignissim sodales. Nam tempus laoreet enim in condimentum. Ut vitae imperdiet orci, eu vestibulum magna. Nam semper purus nulla. Quisque eu dictum nunc. In a nibh orci. Cras pulvinar hendrerit nisi, id commodo sapien suscipit in. In commodo vestibulum fringilla. Vivamus rhoncus rutrum maximus. Proin tempus in quam non varius. Duis volutpat, nunc a venenatis consectetur, ex mi eleifend libero, vel consectetur erat justo eget lacus. In ut consequat sem, in blandit mauris. Aliquam a elit aliquet nisi vulputate sagittis in a arcu. In sed mollis mauris.
+Жюри
 
-Suspendisse potenti. Curabitur mattis malesuada auctor. Nullam viverra bibendum odio nec sollicitudin. Suspendisse potenti. Nam at consequat eros, vitae porttitor tortor. Morbi dui augue, pellentesque in venenatis sit amet, tincidunt id nibh. Mauris quis nibh eu neque pulvinar elementum. Nam urna erat, egestas sit amet nisl ut, pellentesque gravida dolor. Aliquam sit amet feugiat quam. Etiam aliquet erat at lacus scelerisque placerat. Nullam ullamcorper sodales mollis.
+Подсказки и средства связи
 
-Nunc velit enim, ultrices sit amet felis vel, venenatis pharetra nibh. Etiam laoreet dapibus orci quis imperdiet. Aenean at eleifend lacus. Pellentesque in tortor justo. Vestibulum volutpat odio vehicula velit elementum pharetra. Donec vitae ex vitae elit tincidunt laoreet. Donec ac leo ut dui vehicula molestie quis eu nulla. Curabitur id leo tempus, viverra magna sit amet, tincidunt nisi. Duis nec lorem vitae lorem pellentesque hendrerit eget a elit. Phasellus tincidunt dictum efficitur. Nam ullamcorper eros quis tincidunt tristique. Pellentesque convallis nunc ut tempor maximus. Proin eu commodo mi, sed tristique lacus. Ut sodales non arcu in imperdiet. Nunc efficitur pulvinar malesuada.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis felis neque, fermentum vel lorem in, vestibulum congue turpis. Proin ac eros vestibulum, fringilla neque eget, iaculis nisi. Integer luctus ac est eget ultricies. Duis vulputate ac neque nec rutrum. Mauris ut consequat velit. Aenean et convallis urna, eu pellentesque mauris. Maecenas ac nibh vitae turpis placerat accumsan. Fusce fringilla et diam faucibus feugiat. Cras cursus, massa ut aliquet fringilla, lectus felis molestie eros, sit amet rutrum lectus libero nec diam.
-
-Quisque at orci rutrum massa mattis dignissim. Curabitur facilisis id mi quis posuere. Pellentesque quis turpis viverra, ultrices libero non, vehicula purus. Vivamus rutrum interdum varius. Donec scelerisque tellus massa, finibus fermentum libero dapibus vel. Vestibulum dui mauris, sodales ac justo in, facilisis dapibus risus. Morbi sodales molestie sem, in dictum mi condimentum sed.
-
-Sed scelerisque vehicula lacus dignissim sodales. Nam tempus laoreet enim in condimentum. Ut vitae imperdiet orci, eu vestibulum magna. Nam semper purus nulla. Quisque eu dictum nunc. In a nibh orci. Cras pulvinar hendrerit nisi, id commodo sapien suscipit in. In commodo vestibulum fringilla. Vivamus rhoncus rutrum maximus. Proin tempus in quam non varius. Duis volutpat, nunc a venenatis consectetur, ex mi eleifend libero, vel consectetur erat justo eget lacus. In ut consequat sem, in blandit mauris. Aliquam a elit aliquet nisi vulputate sagittis in a arcu. In sed mollis mauris.
-
-Suspendisse potenti. Curabitur mattis malesuada auctor. Nullam viverra bibendum odio nec sollicitudin. Suspendisse potenti. Nam at consequat eros, vitae porttitor tortor. Morbi dui augue, pellentesque in venenatis sit amet, tincidunt id nibh. Mauris quis nibh eu neque pulvinar elementum. Nam urna erat, egestas sit amet nisl ut, pellentesque gravida dolor. Aliquam sit amet feugiat quam. Etiam aliquet erat at lacus scelerisque placerat. Nullam ullamcorper sodales mollis.
-
+Мобильники зрителей
 ''',
         );
     }
