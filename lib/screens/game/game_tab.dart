@@ -12,6 +12,7 @@ class GameTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      key: ValueKey(game),
       onGenerateRoute: (settings) {
         if (settings.name == Navigator.defaultRouteName) {
           return AppRoutes.create<Object>(

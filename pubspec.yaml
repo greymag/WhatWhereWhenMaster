@@ -12,6 +12,7 @@ dependencies:
   async: ^2.11.0
   cloud_firestore: ^4.15.8
   cupertino_icons: ^1.0.0
+  dio: ^5.4.1
   equatable: ^2.0.5
   firebase_analytics: ^10.8.9
   firebase_auth: ^4.17.8

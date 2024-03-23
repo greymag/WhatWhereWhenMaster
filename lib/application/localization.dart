@@ -107,6 +107,22 @@ class AppLocalizations {
     );
   }
 
+  String get loadDataTitle =>
+      Intl.message('Загрузка данных по URL', name: 'loadDataTitle');
+
+  String get urlField =>
+      Intl.message('URL для загрузки JSON', name: 'urlField');
+
+  String get loadFailed => Intl.message(
+        'Не удалось загрузить или распарсить данные',
+        name: 'loadFailed',
+      );
+
+  String get loadSucceed => Intl.message(
+        'Данные загружены',
+        name: 'loadSucceed',
+      );
+
   String get prevQuestionBtn => Intl.message('Назад', name: 'prevQuestionBtn');
 
   String get nextQuestionBtn => Intl.message('Далее', name: 'nextQuestionBtn');
@@ -119,6 +135,10 @@ class AppLocalizations {
   String get timerStartBtn => Intl.message('Старт', name: 'timerStartBtn');
 
   String get timerStopBtn => Intl.message('Стоп', name: 'timerStopBtn');
+
+  String get okBtn => Intl.message('OK', name: 'okBtn');
+  String get loadBtn => Intl.message('Загрузить', name: 'loadBtn');
+  String get cancelBtn => Intl.message('Отмена', name: 'cancelBtn');
 
   String getTimerValue(Duration duration) {
     final seconds = (duration.inMilliseconds / 1000.0).floor();

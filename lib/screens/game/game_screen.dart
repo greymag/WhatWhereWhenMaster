@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:innim_ui/innim_ui.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:what_where_when_master/application/localization.dart';
 import 'package:what_where_when_master/models/models.dart';
+import 'package:what_where_when_master/screens/home/home_screen.dart';
 
 import 'game_tab.dart';
 
@@ -134,9 +134,6 @@ class _Notes extends StatefulWidget {
 }
 
 class __NotesState extends State<_Notes> {
-  static const _prefsKey = 'notesText';
-
-  SharedPreferences? _prefs;
   var _text = '';
   bool _isPending = false;
   bool _isEditing = false;
@@ -167,8 +164,7 @@ class __NotesState extends State<_Notes> {
                   _text = text;
                   _isEditing = false;
                 });
-                await (await getPrefs())
-                    .setString(_prefsKey, _textController.text);
+                await Prefs.saveNotesText(_textController.text);
               },
             ),
           if (!_isEditing && !_isPending)
@@ -217,14 +213,13 @@ class __NotesState extends State<_Notes> {
   Future<void> _load() async {
     _isPending = true;
 
-    final text = (await getPrefs()).getString(_prefsKey) ?? '';
+    final text = await Prefs.getNotesText();
+
+    await Prefs.saveNotesText(_textController.text);
 
     setState(() {
       _isPending = false;
       _text = text;
     });
   }
-
-  Future<SharedPreferences> getPrefs() async =>
-      _prefs ??= await SharedPreferences.getInstance();
 }

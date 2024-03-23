@@ -52,7 +52,6 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     final alertRemaining = widget.alertRemaining;
     final timer = _timer;
     final isRunning = timer != null;
-    final isDone = !isRunning && duration == Duration.zero;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
