@@ -16,26 +16,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 // TMP: emdebbed data -- START
   bool _loading = false;
-  List<Round> _rounds;
+  List<Round>? _rounds;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     if (_rounds == null && !_loading) {
-      _loadData().then((value) => setState(() {
-            _rounds = value;
-          }));
+      _loadData().then(
+        (value) => setState(() {
+          _rounds = value;
+        }),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     if (_loading) return const LoadingWidget();
-    if (_rounds == null || _rounds.isEmpty) return const Text('No data');
+    final rounds = _rounds;
+    if (rounds == null || rounds.isEmpty) return const Text('No data');
 
     return GameScreen(
-      game: GameData(rounds: _rounds),
+      game: GameData(rounds: rounds),
     );
   }
 
@@ -46,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final data = (await jsonDecode(json) as List).cast<Map<String, dynamic>>();
     _loading = false;
-    return data.map((o) => Round.fromJson(o)).toList();
+    return data.map(Round.fromJson).toList();
   }
 
   // TMP: emdebbed data -- END

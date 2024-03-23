@@ -107,7 +107,8 @@ class _GameScreenState extends State<GameScreen> {
 
 class _TextContent extends StatelessWidget {
   final String text;
-  const _TextContent({Key key, @required this.text}) : super(key: key);
+
+  const _TextContent({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +127,7 @@ class _TextContent extends StatelessWidget {
 }
 
 class _Notes extends StatefulWidget {
-  const _Notes({Key key}) : super(key: key);
+  const _Notes();
 
   @override
   __NotesState createState() => __NotesState();
@@ -135,17 +136,16 @@ class _Notes extends StatefulWidget {
 class __NotesState extends State<_Notes> {
   static const _prefsKey = 'notesText';
 
-  SharedPreferences _prefs;
+  SharedPreferences? _prefs;
   var _text = '';
   bool _isPending = false;
   bool _isEditing = false;
 
-  TextEditingController _textController;
+  final _textController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _textController = TextEditingController();
 
     _load();
   }
@@ -167,7 +167,8 @@ class __NotesState extends State<_Notes> {
                   _text = text;
                   _isEditing = false;
                 });
-                await _prefs.setString(_prefsKey, _textController.text);
+                await (await getPrefs())
+                    .setString(_prefsKey, _textController.text);
               },
             ),
           if (!_isEditing && !_isPending)
@@ -216,12 +217,14 @@ class __NotesState extends State<_Notes> {
   Future<void> _load() async {
     _isPending = true;
 
-    _prefs ??= await SharedPreferences.getInstance();
-    final text = _prefs.getString(_prefsKey) ?? '';
+    final text = (await getPrefs()).getString(_prefsKey) ?? '';
 
     setState(() {
       _isPending = false;
       _text = text;
     });
   }
+
+  Future<SharedPreferences> getPrefs() async =>
+      _prefs ??= await SharedPreferences.getInstance();
 }
