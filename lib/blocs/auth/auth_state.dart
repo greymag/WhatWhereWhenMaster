@@ -28,7 +28,7 @@ class AuthSignInInProgress extends AuthState {
 class AuthSignInSuccess extends AuthState {
   final User user;
 
-  const AuthSignInSuccess(this.user) : assert(user != null);
+  const AuthSignInSuccess(this.user);
 
   @override
   List<Object> get props => [user];

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:innim_lib/innim_lib.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,7 +11,7 @@ class GameData extends Mappable {
   /// Rounds of the game.
   final List<Round> rounds;
 
-  const GameData({@required this.rounds}) : assert(rounds != null);
+  const GameData({required this.rounds});
 
   factory GameData.fromJson(Map<String, dynamic> json) =>
       _$GameDataFromJson(json);
@@ -36,15 +35,16 @@ class GameDataEntry extends Mappable {
   /// Game title.
   final String title;
 
-  const GameDataEntry({@required this.uid, @required this.title})
-      : assert(uid != null),
-        assert(title != null);
+  const GameDataEntry({
+    required this.uid,
+    required this.title,
+  });
 
   factory GameDataEntry.fromJson(Map<String, dynamic> json) =>
       _$GameDataEntryFromJson(json);
 
   @override
-  Map<String, Object> toJson() => _$GameDataEntryToJson(this);
+  Map<String, dynamic> toJson() => _$GameDataEntryToJson(this);
 
   @override
   String toString() => 'GameDataEntry(uid: $uid, title: $title)';

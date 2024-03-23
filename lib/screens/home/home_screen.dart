@@ -1,16 +1,16 @@
-import 'package:what_where_when_master/blocs/home/home_bloc.dart';
-import 'package:what_where_when_master/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:innim_lib/innim_lib.dart';
 import 'package:innim_ui/innim_ui.dart';
+import 'package:what_where_when_master/blocs/home/home_bloc.dart';
+import 'package:what_where_when_master/models/models.dart';
 
 /// Home screen.
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -28,10 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // TODO: navigate to the auth form when HomeSignInRequired
             debugAssertState(
-                state is HomeInitial ||
-                    state is HomeLoadInProgress ||
-                    state is HomeSignInRequired,
-                state);
+              state is HomeInitial ||
+                  state is HomeLoadInProgress ||
+                  state is HomeSignInRequired,
+              state,
+            );
             return const LoadingWidget();
           },
         ),

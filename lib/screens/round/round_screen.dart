@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:list_ext/list_ext.dart';
+import 'package:innim_lib/innim_lib.dart';
 
 import 'package:what_where_when_master/application/localization.dart';
 import 'package:what_where_when_master/models/models.dart';
@@ -13,16 +13,14 @@ import 'round_timer_view.dart';
 class RoundScreen extends StatefulWidget {
   final Round round;
 
-  const RoundScreen({Key key, @required this.round})
-      : assert(round != null),
-        super(key: key);
+  const RoundScreen({super.key, required this.round});
 
   @override
-  _RoundScreenState createState() => _RoundScreenState();
+  State<RoundScreen> createState() => _RoundScreenState();
 }
 
 class _RoundScreenState extends State<RoundScreen> {
-  Question _currentQuestion;
+  late Question _currentQuestion;
 
   @override
   void initState() {
@@ -74,20 +72,16 @@ class _RoundScreenContent extends StatefulWidget {
   final int questionNum;
   final int totalQuestions;
   final Question question;
-  final VoidCallback onPrevPressed;
-  final VoidCallback onNextPressed;
+  final VoidCallback? onPrevPressed;
+  final VoidCallback? onNextPressed;
 
-  const _RoundScreenContent(
-      {Key key,
-      @required this.question,
-      @required this.questionNum,
-      @required this.totalQuestions,
-      @required this.onPrevPressed,
-      @required this.onNextPressed})
-      : assert(question != null),
-        assert(questionNum != null),
-        assert(totalQuestions != null),
-        super(key: key);
+  const _RoundScreenContent({
+    required this.question,
+    required this.questionNum,
+    required this.totalQuestions,
+    required this.onPrevPressed,
+    required this.onNextPressed,
+  });
 
   @override
   _RoundScreenContentState createState() => _RoundScreenContentState();
@@ -121,11 +115,11 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
         child: Column(
           children: [
             Expanded(
+              flex: 5,
               child: QuestionView(
                 question: question,
                 showAnswer: _isShowAnswer,
               ),
-              flex: 5,
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -171,23 +165,19 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
 class _ControlButton extends StatelessWidget {
   final String label;
   final EdgeInsets padding;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const _ControlButton({
-    Key key,
-    @required this.onPressed,
-    @required this.label,
+    required this.onPressed,
+    required this.label,
     this.padding = const EdgeInsets.all(8.0),
-  })  : assert(label != null),
-        super(key: key);
+  });
 
   factory _ControlButton.wide({
-    Key key,
-    @required VoidCallback onPressed,
-    @required String label,
+    required VoidCallback? onPressed,
+    required String label,
   }) =>
       _ControlButton(
-        key: key,
         onPressed: onPressed,
         label: label,
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
@@ -195,7 +185,12 @@ class _ControlButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        textStyle: const TextStyle(color: Colors.white),
+        backgroundColor: Colors.blue,
+      ),
+      onPressed: onPressed,
       child: Padding(
         padding: padding,
         child: Text(
@@ -206,9 +201,6 @@ class _ControlButton extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: onPressed,
-      textColor: Colors.white,
-      color: Colors.blue,
     );
   }
 }

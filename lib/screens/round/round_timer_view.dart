@@ -16,25 +16,22 @@ class RoundTimerView extends StatefulWidget {
   /// Callback to be called when the timer is complete.
   final VoidCallback onTimerComplete;
 
-  const RoundTimerView(
-      {Key key,
-      @required this.value,
-      @required this.alertRemaining,
-      @required this.onTimerComplete})
-      : assert(value != null),
-        assert(alertRemaining != null),
-        assert(onTimerComplete != null),
-        super(key: key);
+  const RoundTimerView({
+    super.key,
+    required this.value,
+    required this.alertRemaining,
+    required this.onTimerComplete,
+  });
 
   @override
-  _RoundTimerViewState createState() => _RoundTimerViewState();
+  State<RoundTimerView> createState() => _RoundTimerViewState();
 }
 
 class _RoundTimerViewState extends State<RoundTimerView> {
-  CountdownTimer _timer;
-  Duration _duration;
+  CountdownTimer? _timer;
+  late Duration _duration;
 
-  StreamSubscription<CountdownTimer> _subscription;
+  StreamSubscription<CountdownTimer>? _subscription;
 
   @override
   void initState() {
@@ -54,17 +51,18 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     final loc = AppLocalizations.of(context);
     final duration = _duration;
     final alertRemaining = widget.alertRemaining;
-    final isRunning = _timer != null;
+    final timer = _timer;
+    final isRunning = timer != null;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _TimerControlButton(
-          child: Text(loc.timerResetBtn),
           onPressed: _resetTimer,
+          child: Text(loc.timerResetBtn),
         ),
         isRunning
             ? _RunningTimerValue(
-                timer: _timer,
+                timer: timer,
                 alertRemaining: alertRemaining,
               )
             : _TimerValue(
@@ -73,12 +71,12 @@ class _RoundTimerViewState extends State<RoundTimerView> {
               ),
         isRunning
             ? _TimerControlButton(
-                child: Text(loc.timerStopBtn),
                 onPressed: _stopTimer,
+                child: Text(loc.timerStopBtn),
               )
             : _TimerControlButton(
-                child: Text(loc.timerStartBtn),
                 onPressed: duration.inMilliseconds < 10 ? null : _startTimer,
+                child: Text(loc.timerStartBtn),
               ),
       ],
     );
@@ -93,25 +91,13 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     }
   }
 
-  void _startTimer() {
-    if (_timer == null) {
-      setState(() {
-        _timer = CountdownTimer(_duration, const Duration(seconds: 1));
-        _subscription = _timer.listen((timer) {}, onDone: () {
-          _stopTimer();
-          widget.onTimerComplete();
-        });
-      });
-    }
-  }
+  void _startTimer() {}
 
   void _stopTimer() {
-    if (_timer != null) {
-      setState(() {
-        _duration = _timer.remaining;
-        _clearTimer();
-      });
-    }
+    setState(() {
+      _duration = _timer!.remaining;
+      _clearTimer();
+    });
   }
 
   void _clearTimer() {
@@ -126,11 +112,10 @@ class _RunningTimerValue extends StatefulWidget {
   final CountdownTimer timer;
   final Duration alertRemaining;
 
-  const _RunningTimerValue(
-      {Key key, @required this.timer, @required this.alertRemaining})
-      : assert(timer != null),
-        assert(alertRemaining != null),
-        super(key: key);
+  const _RunningTimerValue({
+    required this.timer,
+    required this.alertRemaining,
+  });
 
   @override
   _RunningTimerValueState createState() => _RunningTimerValueState();
@@ -144,10 +129,14 @@ class _RunningTimerValueState extends State<_RunningTimerValue> {
       initialData: widget.timer,
       builder: (context, snapshot) {
         // TODO: alert sound
-        return _TimerValue(
-          duration: snapshot.data.remaining,
-          alertRemaining: widget.alertRemaining,
-        );
+
+        final data = snapshot.data;
+        return data != null
+            ? _TimerValue(
+                duration: data.remaining,
+                alertRemaining: widget.alertRemaining,
+              )
+            : const Text('--');
       },
     );
   }
@@ -159,11 +148,10 @@ class _TimerValue extends StatelessWidget {
   final Duration duration;
   final Duration alertRemaining;
 
-  const _TimerValue(
-      {Key key, @required this.duration, @required this.alertRemaining})
-      : assert(duration != null),
-        assert(alertRemaining != null),
-        super(key: key);
+  const _TimerValue({
+    required this.duration,
+    required this.alertRemaining,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -182,22 +170,18 @@ class _TimerValue extends StatelessWidget {
 
 class _TimerControlButton extends StatelessWidget {
   final Widget child;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
-  const _TimerControlButton(
-      {Key key, @required this.child, @required this.onPressed})
-      : assert(child != null),
-        super(key: key);
+  const _TimerControlButton({
+    required this.child,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.button;
+    final textStyle = Theme.of(context).textTheme.labelLarge;
     return RawMaterialButton(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: child,
-      ),
-      textStyle: textStyle.copyWith(
+      textStyle: textStyle?.copyWith(
         fontSize: 24,
         fontWeight: FontWeight.normal,
       ),
@@ -209,6 +193,10 @@ class _TimerControlButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: child,
+      ),
     );
   }
 }

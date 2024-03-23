@@ -1,19 +1,21 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:innim_lib/innim_lib.dart';
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:innim_bloc/innim_bloc.dart';
+import 'package:innim_lib/innim_lib.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  FirebaseAuth _auth;
-  StreamSubscription<User> _authSubscription;
+  late FirebaseAuth _auth;
+  StreamSubscription<User?>? _authSubscription;
 
-  AuthBloc() : super(const AuthInitial());
+  AuthBloc() : super(const AuthInitial()) {
+    onBlocEvent(_mapEventToState);
+  }
 
   @override
   Future<void> close() {
@@ -21,8 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return super.close();
   }
 
-  @override
-  Stream<AuthState> mapEventToState(AuthEvent event) async* {
+  Stream<AuthState> _mapEventToState(AuthEvent event) async* {
     if (event is AuthAppStarted) {
       yield* _mapAppStartedToState(event);
     } else if (event is AuthSignedIn) {
@@ -39,17 +40,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     _auth = FirebaseAuth.instance;
 
-    final user = _auth.currentUser;
-    if (user != null) {
-      yield AuthSignInSuccess(user);
+    final currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      yield AuthSignInSuccess(currentUser);
     } else {
       yield const AuthSignInInProgress();
 
       try {
         final userCredential = await FirebaseAuth.instance.signInAnonymously();
+        final newUser = userCredential.user;
 
-        if (userCredential?.user != null) {
-          yield AuthSignInSuccess(userCredential?.user);
+        if (newUser != null) {
+          yield AuthSignInSuccess(newUser);
         } else {
           yield const AuthSignOutSuccess();
         }

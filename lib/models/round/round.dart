@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:innim_lib/innim_lib.dart';
-
-import 'package:what_where_when_master/models/question/question.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:what_where_when_master/models/question/question.dart';
 
 part 'round.g.dart';
 
@@ -19,17 +17,20 @@ class Round extends Mappable {
   /// Optional.
   /// If note defined, than [number] will be used for name,
   /// e.g. "Round 1".
-  final String name;
+  final String? name;
 
   /// List of questions.
   ///
-  /// Sorted in an order of apearance.
+  /// Sorted in an order of appearance.
   final List<Question> questions;
 
-  const Round({@required this.number, this.name, @required this.questions})
-      : assert(number != null && number >= 0),
+  const Round({
+    required this.number,
+    this.name,
+    required this.questions,
+  })  : assert(number >= 0, 'should be positive'),
         // ignore: prefer_is_empty
-        assert(questions != null && questions.length > 0);
+        assert(questions.length > 0, 'should be not empty');
 
   factory Round.fromJson(Map<String, dynamic> json) => _$RoundFromJson(json);
 

@@ -19,7 +19,7 @@ class AuthAppStarted extends AuthEvent {
 @immutable
 class AuthSignedIn extends AuthEvent {
   final User user;
-  const AuthSignedIn(this.user) : assert(user != null);
+  const AuthSignedIn(this.user);
 
   @override
   List<Object> get props => [user];

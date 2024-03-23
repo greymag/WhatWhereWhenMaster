@@ -12,12 +12,10 @@ class GameScreen extends StatefulWidget {
   /// Data of the game.
   final GameData game;
 
-  const GameScreen({Key key, @required this.game})
-      : assert(game != null),
-        super(key: key);
+  const GameScreen({super.key, required this.game});
 
   @override
-  _GameScreenState createState() => _GameScreenState();
+  State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {

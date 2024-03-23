@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:what_where_when_master/application/localization.dart';
 import 'package:what_where_when_master/models/question/question.dart';
-import 'package:flutter/material.dart';
 
 /// Widget for display question
 class QuestionView extends StatelessWidget {
@@ -10,11 +10,11 @@ class QuestionView extends StatelessWidget {
   final Question question;
   final bool showAnswer;
 
-  const QuestionView(
-      {Key key, @required this.question, @required this.showAnswer})
-      : assert(question != null),
-        assert(showAnswer != null),
-        super(key: key);
+  const QuestionView({
+    super.key,
+    required this.question,
+    required this.showAnswer,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class QuestionView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Text(
-        question.intro,
+        question.intro!,
         style: _mainTextStyle.copyWith(fontWeight: FontWeight.bold),
       ),
     );
@@ -62,7 +62,7 @@ class QuestionView extends StatelessWidget {
         ),
         if (question.hasAlternativeAnswer)
           Text(
-            loc.getAlternativeAnswer(question.answerAlt),
+            loc.getAlternativeAnswer(question.answerAlt!),
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -71,7 +71,7 @@ class QuestionView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              loc.getCommentText(question.comment),
+              loc.getCommentText(question.comment!),
               style: const TextStyle(
                 fontSize: 18,
                 fontStyle: FontStyle.italic,

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:innim_lib/innim_lib.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -19,26 +18,25 @@ class Question extends Mappable {
   /// and will be accepted.
   ///
   /// Optional.
-  final String answerAlt;
+  final String? answerAlt;
 
   /// Some introduction text.
   ///
   /// Optional.
-  final String intro;
+  final String? intro;
 
   /// Additional comment.
   ///
   /// Optional.
-  final String comment;
+  final String? comment;
 
-  const Question(
-      {@required this.text,
-      @required this.answer,
-      this.answerAlt,
-      this.intro,
-      this.comment})
-      : assert(text != null),
-        assert(answer != null);
+  const Question({
+    required this.text,
+    required this.answer,
+    this.answerAlt,
+    this.intro,
+    this.comment,
+  });
 
   factory Question.fromJson(Map<String, dynamic> json) =>
       _$QuestionFromJson(json);
@@ -46,11 +44,11 @@ class Question extends Mappable {
   @override
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
 
-  bool get hasIntro => intro != null && intro.isNotEmpty;
+  bool get hasIntro => intro?.isNotEmpty ?? false;
 
-  bool get hasAlternativeAnswer => answerAlt != null && answerAlt.isNotEmpty;
+  bool get hasAlternativeAnswer => answerAlt?.isNotEmpty ?? false;
 
-  bool get hasComment => comment != null && comment.isNotEmpty;
+  bool get hasComment => comment?.isNotEmpty ?? false;
 
   @override
   String toString() {

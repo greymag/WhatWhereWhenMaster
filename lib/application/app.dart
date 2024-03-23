@@ -1,11 +1,3 @@
-import 'package:what_where_when_master/application/routes.dart';
-import 'package:what_where_when_master/application/theme.dart';
-import 'package:what_where_when_master/blocs/app/app_bloc.dart';
-import 'package:what_where_when_master/blocs/auth/auth_bloc.dart';
-import 'package:what_where_when_master/repositories/game/game_firestore_provider.dart';
-import 'package:what_where_when_master/repositories/repositories.dart';
-import 'package:what_where_when_master/screens/launch/launch_screen.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,13 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:innim_lib/innim_lib.dart';
 import 'package:innim_ui/innim_ui.dart';
+import 'package:what_where_when_master/application/routes.dart';
+import 'package:what_where_when_master/application/theme.dart';
+import 'package:what_where_when_master/blocs/app/app_bloc.dart';
+import 'package:what_where_when_master/blocs/auth/auth_bloc.dart';
+import 'package:what_where_when_master/repositories/game/game_firestore_provider.dart';
+import 'package:what_where_when_master/repositories/repositories.dart';
+import 'package:what_where_when_master/screens/launch/launch_screen.dart';
 
 import 'localization.dart';
 
 class WwwMasterApp extends StatelessWidget {
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
-  WwwMasterApp({Key key}) : super(key: key) {
+  WwwMasterApp({super.key}) {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     Bloc.observer = _ApplicationBlocObserver(logEnabled: false);
@@ -52,9 +51,7 @@ class WwwMasterApp extends StatelessWidget {
     );
   }
 
-  Widget _buildRepositories(BuildContext context, {@required Widget child}) {
-    assert(context != null);
-    assert(child != null);
+  Widget _buildRepositories(BuildContext context, {required Widget child}) {
     // TODO: move to DI
     final gameProvider = GameFirestoreProvider();
     return MultiRepositoryProvider(
@@ -81,18 +78,18 @@ class WwwMasterApp extends StatelessWidget {
       builder: (context, child) {
         return _buildGlobalBlocs(
           localizations: AppLocalizations.of(context),
-          builder: (context) => child,
+          builder: (context) => child!,
         );
       },
     );
   }
 
   Widget _buildApp({
-    Widget home,
-    String initialRoute,
-    TransitionBuilder builder,
-    GlobalKey<NavigatorState> navigatorKey,
-    RouteFactory onGenerateRoute,
+    Widget? home,
+    String? initialRoute,
+    TransitionBuilder? builder,
+    GlobalKey<NavigatorState>? navigatorKey,
+    RouteFactory? onGenerateRoute,
     List<NavigatorObserver> navigatorObservers = const <NavigatorObserver>[],
   }) {
     return MaterialApp(
@@ -110,12 +107,9 @@ class WwwMasterApp extends StatelessWidget {
   }
 
   Widget _buildGlobalBlocs({
-    @required WidgetBuilder builder,
-    @required AppLocalizations localizations,
+    required WidgetBuilder builder,
+    required AppLocalizations localizations,
   }) {
-    assert(localizations != null);
-    assert(builder != null);
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
@@ -136,11 +130,11 @@ class WwwMasterApp extends StatelessWidget {
         DefaultCupertinoLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
+        GlobalWidgetsLocalizations.delegate,
       ];
 
   Route<T> _onGenerateRoute<T>(RouteSettings settings) {
-    return AppRoutes.createRoute(settings.name, settings: settings);
+    return AppRoutes.createRoute(settings.name!, settings: settings);
   }
 }
 
@@ -150,18 +144,24 @@ class _ApplicationBlocObserver extends BlocObserver {
   _ApplicationBlocObserver({this.logEnabled = false});
 
   @override
-  void onTransition(Bloc bloc, Transition transition) {
+  void onTransition(
+    Bloc<dynamic, dynamic> bloc,
+    Transition<dynamic, dynamic> transition,
+  ) {
     if (logEnabled) _logTransition(bloc, transition);
     super.onTransition(bloc, transition);
   }
 
   @override
-  void onError(BlocBase bloc, Object error, StackTrace stacktrace) {
+  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stacktrace) {
     super.onError(bloc, error, stacktrace);
     debugError('️Error:\n$error. Stacktrace: $stacktrace');
   }
 
-  void _logTransition(Bloc bloc, Transition transition) {
+  void _logTransition(
+    Bloc<dynamic, dynamic> bloc,
+    Transition<dynamic, dynamic> transition,
+  ) {
     final title = '================= [ ${bloc.runtimeType} ] =================';
     final now = DateTime.now();
     final separator = List.generate(title.length, (index) => '=').join();

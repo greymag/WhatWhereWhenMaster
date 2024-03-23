@@ -1,8 +1,8 @@
-import 'package:what_where_when_master/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:multiple_localization/multiple_localization.dart';
 import 'package:numerus/numerus.dart';
+import 'package:what_where_when_master/models/models.dart';
 
 import 'l10n/messages_all.dart';
 
@@ -18,8 +18,11 @@ class _AppLocalizationsDelegate
   @override
   Future<AppLocalizations> load(Locale locale) {
     return MultipleLocalizations.load(
-        initializeMessages, locale, (l) => AppLocalizations(l),
-        setDefaultLocale: true);
+      initializeMessages,
+      locale,
+      AppLocalizations.new,
+      setDefaultLocale: true,
+    );
   }
 
   @override
@@ -35,15 +38,15 @@ class AppLocalizations {
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
 
-  static final supportedLocales = supportedLangs.map((lang) => Locale(lang));
+  static final supportedLocales = supportedLangs.map(Locale.new);
 
   static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   final String locale;
 
-  AppLocalizations(this.locale) : assert(locale != null);
+  AppLocalizations(this.locale);
 
   String get gameTitle => Intl.message('Выберите раунд', name: 'gameTitle');
 
@@ -71,7 +74,8 @@ class AppLocalizations {
       );
 
   String getRoundTitle(Round round, int totalCounts) {
-    if (round.name?.isNotEmpty ?? false) return round.name;
+    final roundName = round.name;
+    if (roundName != null && roundName.isNotEmpty) return roundName;
 
     if (round.number == 0) {
       return warmUpRoundTitle;
@@ -79,7 +83,7 @@ class AppLocalizations {
       // TODO: remove this, should require name or separate bool for such round
       return reserveRoundTitle;
     } else {
-      return getRoundNumberTitle(round.number.toRomanNumeralString());
+      return getRoundNumberTitle(round.number.toRomanNumeralString() ?? '');
     }
   }
 
@@ -108,7 +112,7 @@ class AppLocalizations {
   String get nextQuestionBtn => Intl.message('Далее', name: 'nextQuestionBtn');
 
   String get showAnswerBtn =>
-      Intl.message('Показать ответ', name: 'showAnserBtn');
+      Intl.message('Показать ответ', name: 'showAnswerBtn');
 
   String get timerResetBtn => Intl.message('Сбросить', name: 'timerResetBtn');
 
