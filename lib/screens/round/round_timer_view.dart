@@ -35,9 +35,8 @@ class _RoundTimerViewState extends State<RoundTimerView> {
 
   @override
   void initState() {
-    _duration = widget.value;
-
     super.initState();
+    _duration = widget.value;
   }
 
   @override
@@ -53,6 +52,7 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     final alertRemaining = widget.alertRemaining;
     final timer = _timer;
     final isRunning = timer != null;
+    final isDone = !isRunning && duration == Duration.zero;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -113,7 +113,8 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     final timer = _timer;
     if (timer != null) {
       setState(() {
-        _duration = timer.remaining;
+        _duration =
+            timer.remaining > Duration.zero ? timer.remaining : Duration.zero;
         _clearTimer();
       });
     }
@@ -203,11 +204,14 @@ class _TimerControlButton extends StatelessWidget {
       textStyle: textStyle?.copyWith(
         fontSize: 24,
         fontWeight: FontWeight.normal,
+        color: onPressed != null ? null : Colors.grey.shade500,
       ),
       constraints: const BoxConstraints(minWidth: 150, minHeight: 150),
       shape: CircleBorder(
         side: BorderSide(
-          color: Colors.lightGreenAccent.shade400,
+          color: onPressed != null
+              ? Colors.lightGreenAccent.shade400
+              : Colors.grey.shade300,
           width: 2,
         ),
       ),
