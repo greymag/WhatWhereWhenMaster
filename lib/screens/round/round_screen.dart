@@ -187,7 +187,7 @@ class _ControlButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        textStyle: const TextStyle(color: Colors.white),
+        foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
       ),
       onPressed: onPressed,
