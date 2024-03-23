@@ -91,13 +91,32 @@ class _RoundTimerViewState extends State<RoundTimerView> {
     }
   }
 
-  void _startTimer() {}
+  void _startTimer() {
+    if (_timer == null) {
+      setState(() {
+        final timer = _timer = CountdownTimer(
+          _duration,
+          const Duration(seconds: 1),
+        );
+        _subscription = timer.listen(
+          null,
+          onDone: () {
+            _stopTimer();
+            widget.onTimerComplete();
+          },
+        );
+      });
+    }
+  }
 
   void _stopTimer() {
-    setState(() {
-      _duration = _timer!.remaining;
-      _clearTimer();
-    });
+    final timer = _timer;
+    if (timer != null) {
+      setState(() {
+        _duration = timer.remaining;
+        _clearTimer();
+      });
+    }
   }
 
   void _clearTimer() {
