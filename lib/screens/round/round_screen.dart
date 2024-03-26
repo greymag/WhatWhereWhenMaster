@@ -144,6 +144,7 @@ class _RoundScreenContentState extends State<_RoundScreenContent> {
             RoundTimerView(
               key: ValueKey(question),
               value: const Duration(minutes: 1),
+              handInAnswers: const Duration(seconds: 10),
               alertRemaining: const Duration(seconds: 10),
               onTimerComplete: _showAnswer,
             ),

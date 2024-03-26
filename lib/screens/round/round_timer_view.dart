@@ -10,6 +10,9 @@ class RoundTimerView extends StatefulWidget {
   /// Timer value.
   final Duration value;
 
+  /// Time for hand in the answers.
+  final Duration handInAnswers;
+
   /// Remaining, when timer is changing color.
   final Duration alertRemaining;
 
@@ -19,6 +22,7 @@ class RoundTimerView extends StatefulWidget {
   const RoundTimerView({
     super.key,
     required this.value,
+    required this.handInAnswers,
     required this.alertRemaining,
     required this.onTimerComplete,
   });
@@ -30,6 +34,8 @@ class RoundTimerView extends StatefulWidget {
 class _RoundTimerViewState extends State<RoundTimerView> {
   CountdownTimer? _timer;
   late Duration _duration;
+
+  var _stage = _TimerStage.notStarted;
 
   StreamSubscription<CountdownTimer>? _subscription;
 
@@ -61,11 +67,17 @@ class _RoundTimerViewState extends State<RoundTimerView> {
         ),
         isRunning
             ? _RunningTimerValue(
+                key: ValueKey(_stage),
                 timer: timer,
                 alertRemaining: alertRemaining,
+                label: switch (_stage) {
+                  _TimerStage.round => loc.thinkingTime,
+                  _TimerStage.handInAnswers => loc.handInAnswers,
+                  _ => ''
+                },
               )
             : _TimerValue(
-                duration: duration,
+                value: duration,
                 alertRemaining: alertRemaining,
               ),
         isRunning
@@ -84,6 +96,7 @@ class _RoundTimerViewState extends State<RoundTimerView> {
   void _resetTimer() {
     if (_timer != null || _duration != widget.value) {
       setState(() {
+        _stage = _TimerStage.notStarted;
         _clearTimer();
         _duration = widget.value;
       });
@@ -93,27 +106,49 @@ class _RoundTimerViewState extends State<RoundTimerView> {
   void _startTimer() {
     if (_timer == null) {
       setState(() {
+        if (_stage == _TimerStage.notStarted) _stage = _TimerStage.round;
+
         final timer = _timer = CountdownTimer(
           _duration,
           const Duration(seconds: 1),
         );
+
         _subscription = timer.listen(
           null,
           onDone: () {
             _stopTimer();
-            widget.onTimerComplete();
+
+            switch (_stage) {
+              case _TimerStage.round:
+                if (widget.handInAnswers > Duration.zero) {
+                  _stage = _TimerStage.handInAnswers;
+                  _duration = widget.handInAnswers;
+                  _startTimer();
+                } else {
+                  _finishTimer();
+                }
+              case _TimerStage.handInAnswers:
+                _finishTimer();
+              case _TimerStage.notStarted:
+              case _TimerStage.finished:
+              // can't be
+            }
           },
         );
       });
     }
   }
 
+  void _finishTimer() {
+    _stage = _TimerStage.finished;
+    widget.onTimerComplete();
+  }
+
   void _stopTimer() {
     final timer = _timer;
     if (timer != null) {
       setState(() {
-        _duration =
-            timer.remaining > Duration.zero ? timer.remaining : Duration.zero;
+        _duration = timer.normalizedRemaining;
         _clearTimer();
       });
     }
@@ -130,10 +165,13 @@ class _RoundTimerViewState extends State<RoundTimerView> {
 class _RunningTimerValue extends StatefulWidget {
   final CountdownTimer timer;
   final Duration alertRemaining;
+  final String label;
 
   const _RunningTimerValue({
+    super.key,
     required this.timer,
     required this.alertRemaining,
+    required this.label,
   });
 
   @override
@@ -151,12 +189,32 @@ class _RunningTimerValueState extends State<_RunningTimerValue> {
 
         final data = snapshot.data;
         return data != null
-            ? _TimerValue(
-                duration: data.remaining,
-                alertRemaining: widget.alertRemaining,
-              )
+            ? _buildValue(context, duration: data.normalizedRemaining)
             : const Text('--');
       },
+    );
+  }
+
+  Widget _buildValue(
+    BuildContext context, {
+    required Duration duration,
+  }) {
+    return Stack(
+      children: [
+        const SizedBox(height: 10),
+        _TimerValue(
+          value: duration,
+          alertRemaining: widget.alertRemaining,
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: Center(
+            child: Text(widget.label),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -164,22 +222,22 @@ class _RunningTimerValueState extends State<_RunningTimerValue> {
 class _TimerValue extends StatelessWidget {
   static const _alertColor = Colors.red;
 
-  final Duration duration;
+  final Duration value;
   final Duration alertRemaining;
 
   const _TimerValue({
-    required this.duration,
+    required this.value,
     required this.alertRemaining,
   });
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
-    final isAlert = duration <= alertRemaining;
+    final isAlert = value <= alertRemaining;
     final color = isAlert ? _alertColor : null;
     return Row(
       children: [
-        for (final char in loc.getTimerValue(duration).characters)
+        for (final char in loc.getTimerValue(value).characters)
           _buildSlot(
             context,
             value: char,
@@ -259,4 +317,11 @@ class _TimerControlButton extends StatelessWidget {
       ),
     );
   }
+}
+
+enum _TimerStage { notStarted, round, handInAnswers, finished }
+
+extension _CountdownTimerExtension on CountdownTimer {
+  Duration get normalizedRemaining =>
+      remaining > Duration.zero ? remaining : Duration.zero;
 }

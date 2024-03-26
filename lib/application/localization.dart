@@ -136,6 +136,12 @@ class AppLocalizations {
 
   String get timerStopBtn => Intl.message('Стоп', name: 'timerStopBtn');
 
+  String get thinkingTime =>
+      Intl.message('Время на обдумывание', name: 'thinkingTime');
+
+  String get handInAnswers =>
+      Intl.message('Сдача ответов', name: 'handInAnswers');
+
   String get okBtn => Intl.message('OK', name: 'okBtn');
   String get loadBtn => Intl.message('Загрузить', name: 'loadBtn');
   String get cancelBtn => Intl.message('Отмена', name: 'cancelBtn');
