@@ -176,13 +176,51 @@ class _TimerValue extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final isAlert = duration <= alertRemaining;
-    return Text(
-      loc.getTimerValue(duration),
+    final color = isAlert ? _alertColor : null;
+    return Row(
+      children: [
+        for (final char in loc.getTimerValue(duration).characters)
+          _buildSlot(
+            context,
+            value: char,
+            color: color,
+          ),
+      ],
+    );
+  }
+
+  Widget _buildSlot(
+    BuildContext context, {
+    required String value,
+    required Color? color,
+  }) {
+    final isSeparator = value == ':';
+    final width = isSeparator ? 30.0 : 60.0;
+
+    Widget child = Text(
+      value,
       style: TextStyle(
         fontSize: 100,
         fontWeight: FontWeight.w200,
-        color: isAlert ? _alertColor : null,
+        color: color,
       ),
+      textAlign: TextAlign.center,
+    );
+
+    if (isSeparator) {
+      child = Baseline(
+        baseline: 86,
+        baselineType: TextBaseline.ideographic,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.only(start: 3),
+          child: child,
+        ),
+      );
+    }
+
+    return SizedBox(
+      width: width,
+      child: child,
     );
   }
 }
