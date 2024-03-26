@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animator/animator.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/async.dart';
 
@@ -211,7 +212,16 @@ class _RunningTimerValueState extends State<_RunningTimerValue> {
           right: 0,
           bottom: 0,
           child: Center(
-            child: Text(widget.label),
+            child: AnimateWidget(
+              cycles: 0,
+              curve: Curves.easeIn,
+              duration: const Duration(seconds: 1),
+              builder: (context, anim) => Opacity(
+                opacity:
+                    anim.fromTween((currentValue) => 1.0.tweenTo(0.0)) ?? 1,
+                child: Text(widget.label),
+              ),
+            ),
           ),
         ),
       ],
