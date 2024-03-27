@@ -215,8 +215,6 @@ class __NotesState extends State<_Notes> {
 
     final text = await Prefs.getNotesText();
 
-    await Prefs.saveNotesText(_textController.text);
-
     setState(() {
       _isPending = false;
       _text = text;
